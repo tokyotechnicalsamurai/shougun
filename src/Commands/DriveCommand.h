@@ -6,6 +6,9 @@
 
 class DriveCommand: public CommandBase
 {
+private:
+	float rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed;
+
 public:
 	DriveCommand();
 	void Initialize();
