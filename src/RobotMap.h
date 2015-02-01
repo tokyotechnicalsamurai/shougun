@@ -20,6 +20,8 @@
 //const int RANGE_FINDER_PORT = 1;
 //const int RANGE_FINDER_MODULE = 1;
 
+const int JOYSTICK = 0;
+
 const int RIGHT_FRONT = 0;
 const int LEFT_FRONT = 1;
 const int RIGHT_BACK = 2;
