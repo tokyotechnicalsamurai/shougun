@@ -11,11 +11,12 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 
-	Talon *DriveRightFront,*DriveLeftFront,*DriveRightBack,*DriveLeftBack;
+	Talon DriveRightFront,DriveLeftFront,DriveRightBack,DriveLeftBack;
 
 public:
 	DriveSubsystem();
 	void InitDefaultCommand();
+	void DriveMotors(float speedRightFront,float speedLeftFront,float speedRightBack,float speedLeftBack);
 
 };
 

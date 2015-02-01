@@ -1,3 +1,4 @@
+/* This Subsystem is Robot's Motor's system. */
 #include "DriveSubsystem.h"
 #include "../RobotMap.h"
 
@@ -14,5 +15,14 @@ void DriveSubsystem::InitDefaultCommand()
 	//SetDefaultCommand(new MySpecialCommand());
 }
 
+/*Drive Each Motor Speed */
+void DriveSubsystem::DriveMotors(float speedRightFront,float speedLeftFront,
+									float speedRightBack,float speedLeftBack)
+{
+	DriveRightFront.Set(speedRightFront);
+	DriveLeftFront.Set(speedLeftFront);
+	DriveRightBack.Set(speedRightBack);
+	DriveLeftBack.Set(speedLeftBack);
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
