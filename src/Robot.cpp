@@ -3,16 +3,21 @@
 #include "WPILib.h"
 #include "Commands/Command.h"
 #include "CommandBase.h"
+//Command and CommandGroup
+#include "Commands/DriveCommand.h"
 
 class Robot: public IterativeRobot
 {
 private:
 	Command *autonomousCommand;
+	Command *driveCommand;
 	LiveWindow *lw;
 
 	void RobotInit()
 	{
 		CommandBase::init();
+		driveCommand = new DriveCommand();
+
 		lw = LiveWindow::GetInstance();
 	}
 	
@@ -40,6 +45,7 @@ private:
 		// this line or comment it out.
 		if (autonomousCommand != NULL)
 			autonomousCommand->Cancel();
+		driveCommand->Start();
 	}
 
 	void TeleopPeriodic()
