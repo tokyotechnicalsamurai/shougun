@@ -15,10 +15,10 @@ void DriveCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveCommand::Execute()
 {
-	rightFrontSpeed = oi->GetStickY() * 0.1 + oi->GetStickX() * 0.1 + oi->GetStickZ() * -0.1;
-	leftFrontSpeed = oi->GetStickY() * 0.1 + oi->GetStickX() * -0.1 + oi->GetStickZ() * 0.1;
-	rightBackSpeed = oi->GetStickY() * 0.1 + oi->GetStickX() * -0.1 + oi->GetStickZ() * -0.1;
-	leftBackSpeed = oi->GetStickY() * 0.1 + oi->GetStickX() * 0.1 + oi->GetStickZ() * 0.1;
+	rightFrontSpeed = oi->GetStickY() * SPEED + oi->GetStickX() * SPEED + oi->GetStickZ() * -SPEED;
+	leftFrontSpeed = oi->GetStickY() * SPEED + oi->GetStickX() * -SPEED + oi->GetStickZ() * SPEED;
+	rightBackSpeed = oi->GetStickY() * SPEED + oi->GetStickX() * -SPEED + oi->GetStickZ() * -SPEED;
+	leftBackSpeed = oi->GetStickY() * SPEED + oi->GetStickX() * SPEED + oi->GetStickZ() * SPEED;
 
 	DriveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 }

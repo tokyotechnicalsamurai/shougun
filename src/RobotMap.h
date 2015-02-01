@@ -3,6 +3,8 @@
 
 #include "WPILib.h"
 
+#define SPEED 0.1
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -26,5 +28,6 @@ const int RIGHT_FRONT = 0;
 const int LEFT_FRONT = 1;
 const int RIGHT_BACK = 2;
 const int LEFT_BACK = 3;
+
 
 #endif
