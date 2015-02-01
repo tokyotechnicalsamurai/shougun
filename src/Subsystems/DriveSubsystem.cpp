@@ -2,7 +2,8 @@
 #include "../RobotMap.h"
 
 DriveSubsystem::DriveSubsystem() :
-		Subsystem("DriveSubsystem")
+		Subsystem("DriveSubsystem"),DriveRightFront(RIGHT_FRONT),DriveLeftFront(LEFT_FRONT),
+			DriveRightBack(RIGHT_BACK),DriveLeftBack(LEFT_BACK)
 {
 
 }
