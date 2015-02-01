@@ -8,13 +8,17 @@ DriveCommand::DriveCommand()
 // Called just before this Command runs the first time
 void DriveCommand::Initialize()
 {
-
+	rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftFrontSpeed = 0.0;
 }
 
 // Called repeatedly when this Command is scheduled to run
 void DriveCommand::Execute()
 {
-
+	rightFrontSpeed = oi->GetStickY() * 0.1;
+	leftFrontSpeed = oi->GetStickY() * 0.1;
+	rightBackSpeed = oi->GetStickY() * 0.1;
+	leftBackSpeed = oi->GetStickY() * 0.1;
+	DriveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
