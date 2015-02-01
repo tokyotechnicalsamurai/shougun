@@ -16,13 +16,14 @@ void DriveSubsystem::InitDefaultCommand()
 }
 
 /*Drive Each Motor Speed */
-void DriveSubsystem::DriveMotors(float speedRightFront,float speedLeftFront,
-									float speedRightBack,float speedLeftBack)
+void DriveSubsystem::DriveMotors(float rightFrontSpeed,float leftFrontSpeed,float rightBackSpeed,float leftBackSpeed)
 {
-	DriveRightFront.Set(speedRightFront);
-	DriveLeftFront.Set(speedLeftFront);
-	DriveRightBack.Set(speedRightBack);
-	DriveLeftBack.Set(speedLeftBack);
+	leftFrontSpeed = -1 * leftFrontSpeed;
+	leftBackSpeed = -1 * leftBackSpeed;
+	DriveRightFront.Set(rightFrontSpeed);
+	DriveLeftFront.Set(leftFrontSpeed);
+	DriveRightBack.Set(rightBackSpeed);
+	DriveLeftBack.Set(leftBackSpeed);
 }
 
 void DriveSubsystem::Stop(){

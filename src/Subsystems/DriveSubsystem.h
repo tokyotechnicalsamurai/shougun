@@ -16,7 +16,7 @@ private:
 public:
 	DriveSubsystem();
 	void InitDefaultCommand();
-	void DriveMotors(float speedRightFront,float speedLeftFront,float speedRightBack,float speedLeftBack);
+	void DriveMotors(float rightFrontSpeed,float leftFrontSpeed,float rightBackSpeed,float leftBackSpeed);
 	void Stop();
 };
 
