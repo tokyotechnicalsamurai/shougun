@@ -3,6 +3,7 @@
 DriveCommand::DriveCommand()
 {
 	Requires(DriveSubsystem);
+	rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed = 0.0;
 }
 
 // Called just before this Command runs the first time
@@ -14,10 +15,11 @@ void DriveCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveCommand::Execute()
 {
-	rightFrontSpeed = oi->GetStickY() * 0.1;
-	leftFrontSpeed = oi->GetStickY() * 0.1;
-	rightBackSpeed = oi->GetStickY() * 0.1;
-	leftBackSpeed = oi->GetStickY() * 0.1;
+	rightFrontSpeed = oi->GetStickY() * 0.1 + oi->GetStickX() * 0.1 + oi->GetStickZ() * -0.1;
+	leftFrontSpeed = oi->GetStickY() * 0.1 + oi->GetStickX() * -0.1 + oi->GetStickZ() * 0.1;
+	rightBackSpeed = oi->GetStickY() * 0.1 + oi->GetStickX() * -0.1 + oi->GetStickZ() * -0.1;
+	leftBackSpeed = oi->GetStickY() * 0.1 + oi->GetStickX() * 0.1 + oi->GetStickZ() * 0.1;
+
 	DriveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 }
 
