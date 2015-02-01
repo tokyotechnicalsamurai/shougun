@@ -3,6 +3,8 @@
 
 #include "WPILib.h"
 
+//コントローラーから入ってくる値に掛ける数
+//これを大きくすることでスピードを早くすることが出来る
 #define SPEED 0.1
 
 /**
@@ -12,18 +14,10 @@
  * floating around.
  */
  
-// For example to map the left and right motors, you could define the
-// following variables to use with your drivetrain subsystem.
-//const int LEFTMOTOR = 1;
-//const int RIGHTMOTOR = 2;
-
-// If you are using multiple modules, make sure to define both the port
-// number and the module. For example you with a rangefinder:
-//const int RANGE_FINDER_PORT = 1;
-//const int RANGE_FINDER_MODULE = 1;
-
+//JoyStick
 const int JOYSTICK = 0;
 
+//Motors
 const int RIGHT_FRONT = 0;
 const int LEFT_FRONT = 1;
 const int RIGHT_BACK = 2;

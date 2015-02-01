@@ -15,7 +15,7 @@ void DriveSubsystem::InitDefaultCommand()
 	//SetDefaultCommand(new MySpecialCommand());
 }
 
-/*Drive Each Motor Speed */
+// Drive Each Motor Speed
 void DriveSubsystem::DriveMotors(float rightFrontSpeed,float leftFrontSpeed,float rightBackSpeed,float leftBackSpeed)
 {
 	// for Left Motor
@@ -28,6 +28,7 @@ void DriveSubsystem::DriveMotors(float rightFrontSpeed,float leftFrontSpeed,floa
 	DriveLeftBack.Set(leftBackSpeed);
 }
 
+// Stop ALL Motor
 void DriveSubsystem::Stop(){
 	DriveRightFront.Disable();
 	DriveLeftFront.Disable();

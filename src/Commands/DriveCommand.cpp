@@ -9,12 +9,13 @@ DriveCommand::DriveCommand()
 // Called just before this Command runs the first time
 void DriveCommand::Initialize()
 {
-	rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftFrontSpeed = 0.0;
+
 }
 
 // Called repeatedly when this Command is scheduled to run
 void DriveCommand::Execute()
 {
+	//それぞれのモーターの速度をコントローラーの状態により調整
 	rightFrontSpeed = oi->GetStickY() * SPEED + oi->GetStickX() * SPEED + oi->GetStickZ() * SPEED;
 	leftFrontSpeed = oi->GetStickY() * SPEED + oi->GetStickX() * -SPEED + oi->GetStickZ() * -SPEED;
 	rightBackSpeed = oi->GetStickY() * SPEED + oi->GetStickX() * -SPEED + oi->GetStickZ() * SPEED;
