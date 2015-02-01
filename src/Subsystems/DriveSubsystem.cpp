@@ -24,5 +24,10 @@ void DriveSubsystem::DriveMotors(float speedRightFront,float speedLeftFront,
 	DriveRightBack.Set(speedRightBack);
 	DriveLeftBack.Set(speedLeftBack);
 }
-// Put methods for controlling this subsystem
-// here. Call these from Commands.
+
+void DriveSubsystem::Stop(){
+	DriveRightFront.Disable();
+	DriveLeftFront.Disable();
+	DriveRightBack.Disable();
+	DriveLeftBack.Disable();
+}
