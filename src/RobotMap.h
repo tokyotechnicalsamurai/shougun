@@ -5,7 +5,7 @@
 
 //コントローラーから入ってくる値に掛ける数
 //これを大きくすることでスピードを早くすることが出来る
-#define SPEED 0.1
+#define SPEED 0.2
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

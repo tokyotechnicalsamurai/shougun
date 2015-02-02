@@ -8,30 +8,30 @@
 class OI
 {
 private:
-	Joystick Joystick;
+	Joystick joystick;
 
 public:
 	OI();
 	inline float GetXplusY(){
 		float val;
-		val = FractionOmitted(Joystick.GetY() + Joystick.GetX());
+		val = FractionOmitted(joystick.GetY() + joystick.GetX());
 		if(val > 1.2) val = 1.2;
 		if(val < -1.2) val = -1.2;
 		return val;
 	}
 	inline float GetXminusY(){
 		float val;
-		val = FractionOmitted(Joystick.GetY() - Joystick.GetX());
+		val = FractionOmitted(joystick.GetY() - joystick.GetX());
 		if(val > 1.2) val = 1.2;
 		if(val < -1.2) val = -1.2;
 		return val;
 	}
 
 
-	inline float GetStickX(){ return FractionOmitted(Joystick.GetX()); }
-	inline float GetStickY(){ return FractionOmitted(Joystick.GetY()); }
-	inline float GetStickZ(){ return FractionOmitted(Joystick.GetZ()); }
-
+	inline float GetStickX(){ return FractionOmitted(joystick.GetX()); }
+	inline float GetStickY(){ return FractionOmitted(joystick.GetY()); }
+	inline float GetStickTwist(){ return FractionOmitted(joystick.GetTwist()); }
+	inline float GetStickThrottle(){ return FractionOmitted(joystick.GetThrottle()); }
 
 	inline float FractionOmitted(float original){
 		if(fabsf(original) < 0.01 ){
