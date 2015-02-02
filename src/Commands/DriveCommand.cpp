@@ -16,12 +16,12 @@ void DriveCommand::Initialize()
 void DriveCommand::Execute()
 {
 	//それぞれのモーターの速度をコントローラーの状態により調整
-	rightFrontSpeed = oi->GetStickY() * SPEED + oi->GetStickX() * SPEED + oi->GetStickZ() * SPEED;
-	leftFrontSpeed = oi->GetStickY() * SPEED + oi->GetStickX() * -SPEED + oi->GetStickZ() * -SPEED;
-	rightBackSpeed = oi->GetStickY() * SPEED + oi->GetStickX() * -SPEED + oi->GetStickZ() * SPEED;
-	leftBackSpeed = oi->GetStickY() * SPEED + oi->GetStickX() * SPEED + oi->GetStickZ() * -SPEED;
+	rightFrontSpeed = oi->GetXplusY() * SPEED + oi->GetStickZ() * SPEED;
+	leftFrontSpeed = oi->GetXminusY() * SPEED + oi->GetStickZ() * -SPEED;
+	rightBackSpeed = oi->GetXminusY() * SPEED + oi->GetStickZ() * SPEED;
+	leftBackSpeed = oi->GetXplusY() * SPEED + oi->GetStickZ() * -SPEED;
 
-	DriveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
+	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
