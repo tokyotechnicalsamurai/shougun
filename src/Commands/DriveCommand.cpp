@@ -2,7 +2,7 @@
 
 DriveCommand::DriveCommand()
 {
-	Requires(DriveSubsystem);
+	Requires(driveSubsystem);
 	rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed = 0.0;
 }
 

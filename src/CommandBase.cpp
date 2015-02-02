@@ -25,5 +25,5 @@ void CommandBase::init()
 
 	oi = new OI();
 
-	DriveSubsystem = new DriveSubsystem();
+	driveSubsystem = new DriveSubsystem();
 }
