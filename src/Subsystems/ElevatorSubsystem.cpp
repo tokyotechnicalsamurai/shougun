@@ -15,3 +15,7 @@ void ElevatorSubsystem::InitDefaultCommand()
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
+void ElevatorSubsystem::DriveElevator(float pullSpeed,float angleSpeed){
+	pullMotor.Set(pullSpeed);
+	angleMotor.Set(angleSpeed);
+}

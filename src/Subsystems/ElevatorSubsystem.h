@@ -16,6 +16,7 @@ private:
 public:
 	ElevatorSubsystem();
 	void InitDefaultCommand();
+	void DriveElevator(float pullSpeed,float angleSpeed);
 };
 
 #endif
