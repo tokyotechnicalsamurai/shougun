@@ -32,6 +32,8 @@ public:
 	inline float GetStickY(){ return FractionOmitted(joystick.GetY()); }
 	inline float GetStickTwist(){ return FractionOmitted(joystick.GetTwist()); }
 	inline float GetStickThrottle(){ return FractionOmitted(joystick.GetThrottle()); }
+	inline float GetStickRightX(){ return FractionOmitted(joystick.GetRawAxis(5)); }
+	inline float GetStcikRightY(){ return FractionOmitted(joystick.GetRawAxis(6)); }
 
 	inline float FractionOmitted(float original){
 		if(fabsf(original) < 0.01 ){
