@@ -5,6 +5,8 @@
 // Initialize a single static instance of all of your subsystems to NULL
 DriveSubsystem* CommandBase::driveSubsystem = NULL;
 ElevatorSubsystem* CommandBase::elevatorSubsystem = NULL;
+CameraSubsystem* CommandBase::cameraSubsystem = NULL;
+
 OI* CommandBase::oi = NULL;
 
 CommandBase::CommandBase(char const *name) :
@@ -27,4 +29,5 @@ void CommandBase::init()
 
 	driveSubsystem = new DriveSubsystem();
 	elevatorSubsystem = new ElevatorSubsystem();
+	cameraSubsystem = new CameraSubsystem();
 }
