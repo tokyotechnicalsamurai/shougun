@@ -3,7 +3,6 @@
 
 #include "Subsystems/DriveSubsystem.h"
 #include "Subsystems/ElevatorSubsystem.h"
-#include "Subsystems/CameraSubsystem.h"
 #include <string>
 #include "Commands/Command.h"
 #include "OI.h"
@@ -23,7 +22,6 @@ public:
 	// Create a single static instance of all of your subsystems
 	static DriveSubsystem *driveSubsystem;
 	static ElevatorSubsystem *elevatorSubsystem;
-	static CameraSubsystem cameraSubsystem;
 
 	static OI *oi;
 };
