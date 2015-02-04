@@ -11,12 +11,12 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 
-	Talon pullMotor,angleMotor;
+	Talon pullMotor;
 
 public:
 	ElevatorSubsystem();
 	void InitDefaultCommand();
-	void DriveElevator(float pullSpeed,float angleSpeed);
+	void DriveElevator(float pullSpeed);
 };
 
 #endif

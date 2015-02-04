@@ -3,8 +3,7 @@
 DriveCommand::DriveCommand()
 {
 	Requires(driveSubsystem);
-	Requires(elevatorSubsystem);
-	rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed = pullSpeed = angleSpeed = 0.0;
+	rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed  = 0.0;
 }
 
 // Called just before this Command runs the first time
@@ -24,10 +23,6 @@ void DriveCommand::Execute()
 
 	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 
-	pullSpeed = oi->GetStcikRightY() * SPEED;
-	angleSpeed = oi->GetStickRightX() * SPEED;
-
-	elevatorSubsystem->DriveElevator(pullSpeed,angleSpeed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
