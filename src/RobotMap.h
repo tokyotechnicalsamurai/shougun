@@ -23,5 +23,8 @@ const int LEFT_FRONT = 1;
 const int RIGHT_BACK = 2;
 const int LEFT_BACK = 3;
 
+//Elevator motors
+const int PULL_MOTOR = 4;
+const int ANGLE_MOTOR = 5;
 
 #endif

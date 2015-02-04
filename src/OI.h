@@ -8,9 +8,9 @@
 class OI
 {
 private:
-	Joystick joystick;
 
 public:
+	Joystick joystick;
 	OI();
 	inline float GetXplusY(){
 		float val;
@@ -32,6 +32,14 @@ public:
 	inline float GetStickY(){ return FractionOmitted(joystick.GetY()); }
 	inline float GetStickTwist(){ return FractionOmitted(joystick.GetTwist()); }
 	inline float GetStickThrottle(){ return FractionOmitted(joystick.GetThrottle()); }
+	inline float GetStcikRightY(){ return RightStickOmitted(joystick.GetRawAxis(5)); }
+
+	inline float RightStickOmitted(float origin){
+		if(fabsf(origin) < 0.5){
+			origin = 0;
+		}
+		return origin;
+	}
 
 	inline float FractionOmitted(float original){
 		if(fabsf(original) < 0.01 ){
