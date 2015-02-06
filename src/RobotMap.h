@@ -27,4 +27,9 @@ const int LEFT_BACK = 3;
 const int PULL_MOTOR = 4;
 const int ANGLE_MOTOR = 5;
 
+//Sensors
+const int GYRO_SENSOR = 0;
+const int DIST_RIGHT = 1;
+const int DIST_LEFT = 2;
+
 #endif
