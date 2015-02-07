@@ -12,6 +12,7 @@ private:
 	// for methods that implement subsystem capabilities
 
 	Talon pullMotor;
+	DigitalInput underSwitch;
 
 public:
 	ElevatorSubsystem();
