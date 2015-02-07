@@ -24,9 +24,9 @@ void DriveCommand::Execute()
 
 	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 
-	if(elevatorSubsystem->underSwitch.Get() && oi->GetStcikRightY() < 0){
+	if(elevatorSubsystem->underSwitch.Get() && oi->GetStcikRightY() > 0){
 		elevatorSubsystem->DriveElevator(0);
-	}else if(elevatorSubsystem->upSwitch.Get() && oi->GetStcikRightY() > 0){
+	}else if(elevatorSubsystem->upSwitch.Get() && oi->GetStcikRightY() < 0){
 		elevatorSubsystem->DriveElevator(0);
 	}else{
 		elevatorSubsystem->DriveElevator(oi->GetStcikRightY());

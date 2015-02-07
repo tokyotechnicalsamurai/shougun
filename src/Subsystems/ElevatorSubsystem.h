@@ -12,9 +12,10 @@ private:
 	// for methods that implement subsystem capabilities
 
 	Talon pullMotor;
-	DigitalInput underSwitch,upSwitch;
 
 public:
+	DigitalInput underSwitch,upSwitch;
+
 	ElevatorSubsystem();
 	void InitDefaultCommand();
 	void DriveElevator(float pullSpeed);
