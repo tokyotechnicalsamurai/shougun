@@ -14,6 +14,8 @@ private:
 	Talon pullMotor;
 
 public:
+	DigitalInput underSwitch,upSwitch;
+
 	ElevatorSubsystem();
 	void InitDefaultCommand();
 	void DriveElevator(float pullSpeed);

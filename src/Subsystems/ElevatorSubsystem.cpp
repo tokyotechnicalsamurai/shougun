@@ -2,7 +2,8 @@
 #include "../RobotMap.h"
 
 ElevatorSubsystem::ElevatorSubsystem() :
-		Subsystem("ElevatorSubsystem"),pullMotor(PULL_MOTOR)
+		Subsystem("ElevatorSubsystem"),pullMotor(PULL_MOTOR),
+		underSwitch(UNDER_LIMIT),upSwitch(UP_LIMIT)
 {
 
 }
