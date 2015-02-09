@@ -3,10 +3,9 @@
 
 #include "../CommandBase.h"
 #include "WPILib.h"
-//This command is not completed yet.
+
 class GyroCommand: public CommandBase
 {
-
 public:
 	GyroCommand();
 	void Initialize();
@@ -14,6 +13,13 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+	float GetValue();
+private:
+	int base;
+	int prespeed;
+	float deg;
+	float beforetime;
+	Timer* clock;
 };
 
 #endif
