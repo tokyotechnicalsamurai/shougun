@@ -18,8 +18,6 @@ private:
 		CommandBase::init();
 		driveCommand = new DriveCommand();
 		//Camera Capture send to Dashboard
-		CameraServer::GetInstance()->SetQuality(50);
-		CameraServer::GetInstance()->StartAutomaticCapture("cam1");
 
 		lw = LiveWindow::GetInstance();
 	}
