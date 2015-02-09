@@ -32,7 +32,7 @@ int SensorSubsystem::GetDistLeft(void)
 		ans += dist_left->GetValue();
 	}
 	ans /= 10;
-	ans = 6787 / (ans - 3) -4; //for meter from input
+	ans = 30 / ans; //for meter from input
 	return(ans);
 }
 
@@ -43,7 +43,7 @@ int SensorSubsystem::GetDistRight(void)
 		ans += dist_right->GetValue();
 	}
 	ans /= 10;
-	ans = 6787 / (ans - 3) -4;
+	ans = 30 / ans;
 	return(ans);
 }
 //At first, we only check the value of X.  If it succeed, this function return X value.
