@@ -24,7 +24,6 @@ public:
 	static DriveSubsystem *driveSubsystem;
 	static ElevatorSubsystem *elevatorSubsystem;
 	static SensorSubsystem* sensorSubsystem;
-	static
 
 	static OI *oi;
 };
