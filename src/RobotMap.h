@@ -24,8 +24,9 @@ const int RIGHT_BACK = 2;
 const int LEFT_BACK = 3;
 
 //Elevator motors
-const int PULL_MOTOR_LEFT = 4;
-const int PULL_MOTOR_RIGHT = 5;
+
+const int PULL_MOTOR_RIGHT = 4;
+const int PULL_MOTOR_LEFT = 5;
 
 //Analog Sensors
 const int GYRO_SENSOR = 0;
