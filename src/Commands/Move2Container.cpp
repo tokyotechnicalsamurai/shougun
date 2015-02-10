@@ -15,7 +15,7 @@ void Move2Container::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void Move2Container::Execute()
 {
-	while(sensorSubsystem->GetDistLeft() > 10 && sensorSubsystem->GetDistRight() > 10){
+	while(sensorSubsystem->GetDistLeft() > 10.0 && sensorSubsystem->GetDistRight() > 10.0){
 		driveSubsystem->DriveMotors(0.3,-0.3,-0.3,0.3);
 	}
 	driveSubsystem->DriveMotors(0.3,-0.3,-0.3,0.3);
