@@ -13,16 +13,21 @@ private:
 	AnalogInput* dist_left;
 	AnalogInput* dist_right;
 	I2C* acceleration;
+	Timer* clock;
+	float deg;
+	float base;
+	float prespeed;
+	float beforetime;
 public:
 	SensorSubsystem();
 	void InitDefaultCommand();
 	int GetGyro(void);
-	int GetDistLeft(void);
-	int GetDistRight(void);
 	int GetXacceleration(void);
 	int GetYacceleration(void);
 	int GetZacceleration(void);
-	void AccelerationTest(void);
+	float GetDistLeft(void);
+	float GetDistRight(void);
+	float GetDegree(void);
 };
 
 #endif
