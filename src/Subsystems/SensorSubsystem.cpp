@@ -9,7 +9,21 @@ SensorSubsystem::SensorSubsystem() :
 	dist_left = new AnalogInput(DIST_LEFT);
 	dist_right = new AnalogInput(DIST_RIGHT);
 	acceleration = new I2C(I2C::kOnboard , 0b0011000);
+	clock = new Timer();
+
+	deg = 0;
+	base = 0;
+	prespeed = 0;
+	beforetime = 0;
+
 	acceleration->Write(0x20 , 0x7F);
+	acceleration->Write(0x23 , 0x08);
+	clock->Start();
+	for(short i = 0  ;  i < 10  ;  i++){
+		base += GetGyro();
+	}
+	base /= 10.0;
+	beforetime = clock->Get();
 }
 
 void SensorSubsystem::InitDefaultCommand()
@@ -20,66 +34,101 @@ void SensorSubsystem::InitDefaultCommand()
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
+
 int SensorSubsystem::GetGyro(void)
 {
 	return(gyro->GetValue());
 }
+
 //Dist sensor is unsustainable, so we may calculate average value.
-int SensorSubsystem::GetDistLeft(void)
+float SensorSubsystem::GetDistLeft(void)
 {
-	unsigned int ans = 0;
+	float ans = 0;
 	for(short i = 0  ;  i < 10  ;  i++){
-		ans += dist_left->GetValue();
+		ans += dist_left->GetVoltage();
 	}
-	ans /= 10;
-	ans = 30 / ans; //for meter from input
+	ans /= 10.0;
+	ans = 30.0 / ans; //for meter from input
 	return(ans);
 }
 
-int SensorSubsystem::GetDistRight(void)
+float SensorSubsystem::GetDistRight(void)
 {
-	unsigned int ans = 0;
+	float ans = 0;
 	for(short i = 0  ;  i < 10  ;  i++){
-		ans += dist_right->GetValue();
+		ans += dist_right->GetVoltage();
 	}
-	ans /= 10;
-	ans = 30 / ans;
+	ans /= 10.0;
+	ans = 30.0 / ans; //for meter from input
 	return(ans);
 }
-//At first, we only check the value of X.  If it succeed, this function return X value.
+
 int SensorSubsystem::GetXacceleration(void)
 {
-	unsigned char array1[10] = "";
-	unsigned char array2[10] = "";
-	acceleration->Read(0x28 , 2 , array1);
-	acceleration->Read(0x29 , 2 , array2);
-	for(short i = 0  ;  i < 10  ;  i++){
-		if(array1[i] == '\0') break;
-		std::cout << "X_L[" << i << "]" << " = " << array1[i] << std::endl;
-	}
-	std::cout << std::endl;
-	for(short i = 0  ;  i < 10  ;  i++){
-		if(array2[i] == '\0') break;
-		std::cout << "X_H[" << i << "]" << " = " << array2[i] << std::endl;
-	}
-	return(0);
+	unsigned char array[2];
+	short x;
+
+	acceleration->Write(0x20 , 0x7F);//These sentenses should be always done?
+	acceleration->Write(0x23 , 0x08);//
+	acceleration->Read(0x28 , 1 , &array[0]);
+	acceleration->Read(0x29 , 1 , &array[1]);
+
+	x = (array[1] << 8) | array[0];
+
+	std::cout << "x = " << x << std::endl;
+	return(x);
 }
-//Y and Z are not written yet because I am tired.
+
 int SensorSubsystem::GetYacceleration(void)
 {
-	return(0);
+	unsigned char array[2];
+	short y;
+
+	acceleration->Write(0x20 , 0x7F);
+	acceleration->Write(0x23 , 0x08);
+	acceleration->Read(0x30 , 1 , &array[0]);
+	acceleration->Read(0x31 , 1 , &array[1]);
+
+	y = (array[1] << 8) | array[0];
+
+	std::cout << "y = " << y << std::endl;
+	return(y);
 }
 
 int SensorSubsystem::GetZacceleration(void)
 {
-	return(0);
-}
-//This is a test whether we can use I2C.
-void SensorSubsystem::AccelerationTest(void)
-{
 	unsigned char array[2];
-	acceleration->Read(0x0F , 2 , array);
-	for(short i = 0  ;  i < 2  ;  i++){
-		std::cout << "array[" << i << "]" << " = " << array[i] << std::endl;
+	short z;
+
+	acceleration->Write(0x20 , 0x7F);
+	acceleration->Write(0x23 , 0x08);
+	acceleration->Read(0x32 , 1 , &array[0]);
+	acceleration->Read(0x33 , 1 , &array[1]);
+
+	z = (array[1] << 8) | array[0];
+
+	std::cout << "z = " << z << std::endl;
+	return(z);
+}
+
+//This function is used in loop to check degree.
+float SensorSubsystem::GetDegree(void)
+{
+	float data = 0;
+	float time;
+	float speed;
+
+	for(short i = 0  ;  i < 10  ;  i++){
+		data += gyro->GetVoltage();
 	}
+	data /= 10.0;
+	data -= base;
+	if(-0.006 < data  &&  data < 0.006) data = 0;
+	speed = data / 0.0067;
+	time = clock->Get() - beforetime;
+	beforetime = clock->Get();
+	deg += (prespeed + speed) / 2.0 * time;
+	prespeed = speed;
+	std::cout << deg << std::endl;
+	return(deg);
 }
