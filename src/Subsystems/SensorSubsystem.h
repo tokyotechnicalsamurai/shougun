@@ -13,6 +13,7 @@ private:
 	AnalogInput* dist_left;
 	AnalogInput* dist_right;
 	I2C* acceleration;
+	I2C* compass;
 	Timer* clock;
 	float deg;
 	float base;
@@ -28,6 +29,7 @@ public:
 	float GetDistLeft(void);
 	float GetDistRight(void);
 	float GetDegree(void);
+	float GetCompass(void);
 };
 
 #endif
