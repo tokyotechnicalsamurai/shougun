@@ -25,7 +25,7 @@ void Move2Container::Execute()
 	}
 	if(countCenter >= 10){
 		isCenter = false;
-		SetTimeout(0.5);
+		SetTimeout(MOVE2CONTAINERTIME);
 	}
 	driveSubsystem->DriveMotors(0.3,-0.3,-0.3,0.3);
 
