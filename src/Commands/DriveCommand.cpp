@@ -1,9 +1,11 @@
 #include "DriveCommand.h"
+#include <iostream>
 
 DriveCommand::DriveCommand()
 {
 	Requires(driveSubsystem);
 	Requires(elevatorSubsystem);
+	Requires(sensorSubsystem);
 	rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed  = 0.0;
 }
 
@@ -24,6 +26,13 @@ void DriveCommand::Execute()
 
 	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 
+	if(elevatorSubsystem->underSwitch.Get()){
+		elevatorSubsystem->DriveElevator(-0.1);
+		Wait(0.05);
+	}else if(elevatorSubsystem->upSwitch.Get()){
+		elevatorSubsystem->DriveElevator(0.1);
+		Wait(0.05);
+	}
 	if(elevatorSubsystem->underSwitch.Get() && oi->GetStcikRightY() > 0){
 		elevatorSubsystem->DriveElevator(0);
 	}else if(elevatorSubsystem->upSwitch.Get() && oi->GetStcikRightY() < 0){

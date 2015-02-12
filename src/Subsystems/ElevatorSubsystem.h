@@ -11,7 +11,7 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 
-	Talon pullMotor;
+	Talon pullMotorRight,pullMotorLeft;
 
 public:
 	DigitalInput underSwitch,upSwitch;

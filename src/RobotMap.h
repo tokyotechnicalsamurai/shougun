@@ -5,7 +5,14 @@
 
 //コントローラーから入ってくる値に掛ける数
 //これを大きくすることでスピードを早くすることが出来る
-#define SPEED 0.2
+#define DRIVEMOVE false
+#define ELEVATORMOVE true
+
+#define SPEED 0.3
+
+//Auto mode
+#define CONTAINERDIST 20.0
+#define MOVE2CONTAINERTIME 0.3
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -24,8 +31,9 @@ const int RIGHT_BACK = 2;
 const int LEFT_BACK = 3;
 
 //Elevator motors
-const int PULL_MOTOR = 4;
-const int ANGLE_MOTOR = 5;
+
+const int PULL_MOTOR_RIGHT = 4;
+const int PULL_MOTOR_LEFT = 5;
 
 //Analog Sensors
 const int GYRO_SENSOR = 0;

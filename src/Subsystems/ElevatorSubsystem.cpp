@@ -2,7 +2,8 @@
 #include "../RobotMap.h"
 
 ElevatorSubsystem::ElevatorSubsystem() :
-		Subsystem("ElevatorSubsystem"),pullMotor(PULL_MOTOR),
+		Subsystem("ElevatorSubsystem"),
+		pullMotorRight(PULL_MOTOR_RIGHT),pullMotorLeft(PULL_MOTOR_LEFT),
 		underSwitch(UNDER_LIMIT),upSwitch(UP_LIMIT)
 {
 
@@ -17,5 +18,12 @@ void ElevatorSubsystem::InitDefaultCommand()
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 void ElevatorSubsystem::DriveElevator(float pullSpeed){
-	pullMotor.Set(pullSpeed);
+	//if underSwitch is pushed and pullspeed is plus, elevator doesn't move
+	//if upSwitch is pushed and pullspeed is minus, elevator doesn't move
+	if(ELEVATORMOVE){
+		if(!(underSwitch.Get() && pullSpeed > 0) && !(upSwitch.Get() && pullSpeed < 0)){
+			pullMotorLeft.Set(pullSpeed);
+			pullMotorRight.Set(pullSpeed);
+		}
+	}
 }
