@@ -20,8 +20,10 @@ void ElevatorSubsystem::InitDefaultCommand()
 void ElevatorSubsystem::DriveElevator(float pullSpeed){
 	//if underSwitch is pushed and pullspeed is plus, elevator doesn't move
 	//if upSwitch is pushed and pullspeed is minus, elevator doesn't move
-	if(!(underSwitch.Get() && pullSpeed > 0) && !(upSwitch.Get() && pullSpeed < 0)){
-		pullMotorLeft.Set(pullSpeed);
-		pullMotorRight.Set(pullSpeed);
+	if(ELEVATORMOVE){
+		if(!(underSwitch.Get() && pullSpeed > 0) && !(upSwitch.Get() && pullSpeed < 0)){
+			pullMotorLeft.Set(pullSpeed);
+			pullMotorRight.Set(pullSpeed);
+		}
 	}
 }

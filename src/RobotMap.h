@@ -7,6 +7,8 @@
 //これを大きくすることでスピードを早くすることが出来る
 #define SPEED 0.2
 #define CONTAINERDIST 20.0
+#define DRIVEMOVE true
+#define ELEVATORMOVE true
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
