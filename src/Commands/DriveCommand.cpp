@@ -33,13 +33,7 @@ void DriveCommand::Execute()
 		elevatorSubsystem->DriveElevator(0.1);
 		Wait(0.05);
 	}
-	if(elevatorSubsystem->underSwitch.Get() && oi->GetStcikRightY() > 0){
-		elevatorSubsystem->DriveElevator(0);
-	}else if(elevatorSubsystem->upSwitch.Get() && oi->GetStcikRightY() < 0){
-		elevatorSubsystem->DriveElevator(0);
-	}else{
-		elevatorSubsystem->DriveElevator(oi->GetStcikRightY());
-	}
+	elevatorSubsystem->DriveElevator(oi->GetStcikRightY());
 }
 
 // Make this return true when this Command no longer needs to run execute()
