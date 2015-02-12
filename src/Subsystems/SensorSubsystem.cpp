@@ -141,17 +141,17 @@ float SensorSubsystem::GetCompass(void)
 {
 	unsigned char array[4];
 	short x , y;
-	float tan;
+	float X , Y;
 	for(short i = 0  ;  i < 4  ;  i++){
 		compass->Read(0x03 + i , 1 , &array[i]);
 	}
 	x = (array[0] << 8) | array[1];
 	y = (array[2] << 8) | array[3];
 	if(x){
-		tan = y;
-		tan /= x;
-		return((atan(tan) / PI * 180) + ((y > 0) ? 0 : 180));
+		X = x;
+		Y = y;
+		return((atan(Y / X) / PI * 180) + 90 + ((x > 0) ? 0 : 180));
 	}else{
-		return((y > 0) ? 90 : 270);
+		return((y > 0) ? 180 : 360);
 	}
 }
