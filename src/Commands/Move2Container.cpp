@@ -5,6 +5,7 @@ Move2Container::Move2Container()
 	Requires(driveSubsystem);
 	Requires(sensorSubsystem);
 	isCenter = false;
+	countCenter = 0;
 }
 
 // Called just before this Command runs the first time
@@ -17,6 +18,11 @@ void Move2Container::Initialize()
 void Move2Container::Execute()
 {
 	if(sensorSubsystem->GetDistLeft() <= 10.0 && sensorSubsystem->GetDistRight() <= 10.0){
+		countCenter++;
+	}else{
+		countCenter = 0;
+	}
+	if(countCenter >= 10){
 		isCenter = false;
 		SetTimeout(0.5);
 	}

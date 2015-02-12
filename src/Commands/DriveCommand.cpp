@@ -1,9 +1,11 @@
 #include "DriveCommand.h"
+#include <iostream>
 
 DriveCommand::DriveCommand()
 {
 	Requires(driveSubsystem);
 	Requires(elevatorSubsystem);
+	Requires(sensorSubsystem);
 	rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed  = 0.0;
 }
 
