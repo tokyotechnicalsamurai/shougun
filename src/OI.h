@@ -12,6 +12,7 @@ private:
 public:
 	Joystick joystick;
 	OI();
+
 	inline float GetXplusY(){
 		float val;
 		val = FractionOmitted(joystick.GetY() + joystick.GetX());
@@ -36,7 +37,10 @@ public:
 	//Button
 	inline bool GetSitckLeftButton(){ return joystick.GetRawButton(5); }
 	inline bool GetStickRightButton(){ return joystick.GetRawButton(6); }
+	//Ureget button
+	inline bool GetUregetButton(){ return joystick.GetRawButton(7) && joystick.GetRawButton(8); }
 
+	//Omitted for RightStick(Elevator Subsystem)
 	inline float RightStickOmitted(float origin){
 		if(fabsf(origin) < 0.5){
 			origin = 0;
@@ -44,6 +48,7 @@ public:
 		return origin;
 	}
 
+	//Omitted for LeftStick(Drive Subsystem)
 	inline float FractionOmitted(float original){
 		if(fabsf(original) < 0.01 ){
 			original = 0;
