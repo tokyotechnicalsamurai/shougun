@@ -27,12 +27,15 @@ public:
 		return val;
 	}
 
-
+	//Sticks
 	inline float GetStickX(){ return FractionOmitted(joystick.GetX()); }
 	inline float GetStickY(){ return FractionOmitted(joystick.GetY()); }
 	inline float GetStickTwist(){ return FractionOmitted(joystick.GetTwist()); }
 	inline float GetStickThrottle(){ return FractionOmitted(joystick.GetThrottle()); }
 	inline float GetStcikRightY(){ return RightStickOmitted(joystick.GetRawAxis(5)); }
+	//Button
+	inline bool GetSitckLeftButton(){ return joystick.GetRawButton(5); }
+	inline bool GetStickRightButton(){ return joystick.GetRawButton(6); }
 
 	inline float RightStickOmitted(float origin){
 		if(fabsf(origin) < 0.5){
@@ -47,6 +50,7 @@ public:
 		}
 		return original;
 	}
+
 };
 
 #endif

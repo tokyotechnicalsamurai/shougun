@@ -5,7 +5,7 @@
 
 //コントローラーから入ってくる値に掛ける数
 //これを大きくすることでスピードを早くすることが出来る
-#define DRIVEMOVE false
+#define DRIVEMOVE true
 #define ELEVATORMOVE true
 
 #define SPEED 0.3

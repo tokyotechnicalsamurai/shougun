@@ -7,7 +7,7 @@
 class DriveCommand: public CommandBase
 {
 private:
-	float rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed;
+	float speed,rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed;
 
 public:
 	DriveCommand();
