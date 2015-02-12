@@ -65,9 +65,9 @@ public:
 		}
 	}
 	//for normal mode:moving of Elevator
-	inline float GetStcikRightY(){ return ElevatorStickOmitted(joystick.GetRawAxis(5)); }
+	inline float GetStickRightY(){ return ElevatorStickOmitted(joystick.GetRawAxis(5)); }
 	//for kawabata mode:moving of Drive turn
-	inline float GetStcikRightX(){ return FractionOmitted(joystick.GetRawAxis(6)); }
+	inline float GetStickRightX(){ return FractionOmitted(joystick.GetRawAxis(6)); }
 
 	/// Button
 	inline bool GetSitckLeftButton(){ return joystick.GetRawButton(5); }
