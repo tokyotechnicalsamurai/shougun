@@ -6,6 +6,11 @@
 /**
  * For Teleoperated Mode
  */
+
+//Controller Mode
+//1.normal 2.kawabata
+#define CONTRLLOER_MODE 1
+
 //Move Robot when these value is true
 #define DRIVEMOVE true
 #define ELEVATORMOVE true
