@@ -1,4 +1,5 @@
 #include "Move2Container.h"
+#include "../RobotMap.h"
 
 Move2Container::Move2Container()
 {
@@ -17,7 +18,7 @@ void Move2Container::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void Move2Container::Execute()
 {
-	if(sensorSubsystem->GetDistLeft() <= 10.0 && sensorSubsystem->GetDistRight() <= 10.0){
+	if(sensorSubsystem->GetDistLeft() <= CONTAINERDIST && sensorSubsystem->GetDistRight() <= CONTAINERDIST){
 		countCenter++;
 	}else{
 		countCenter = 0;
