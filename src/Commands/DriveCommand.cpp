@@ -22,7 +22,7 @@ void DriveCommand::Execute()
 	//それぞれのモーターの速度をコントローラーの状態により調整
 	speed = SPEED;
 	if(oi->GetStickRightButton()){
-		speed = 0.15;
+		speed = SLOWSPEED;
 	}
 	rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
 	leftFrontSpeed = oi->GetXminusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
