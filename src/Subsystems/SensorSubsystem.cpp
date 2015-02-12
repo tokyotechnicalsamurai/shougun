@@ -1,6 +1,8 @@
 #include "SensorSubsystem.h"
 #include "../RobotMap.h"
 #include <iostream>
+#include <math.h>
+#define PI 3.141592
 
 SensorSubsystem::SensorSubsystem() :
 		Subsystem("SensorSubsystem")
@@ -9,6 +11,7 @@ SensorSubsystem::SensorSubsystem() :
 	dist_left = new AnalogInput(DIST_LEFT);
 	dist_right = new AnalogInput(DIST_RIGHT);
 	acceleration = new I2C(I2C::kOnboard , 0b0011000);
+	compass = new I2C(I2C::kOnboard , 0x1E);
 	clock = new Timer();
 
 	deg = 0;
@@ -18,6 +21,7 @@ SensorSubsystem::SensorSubsystem() :
 
 	acceleration->Write(0x20 , 0x7F);
 	acceleration->Write(0x23 , 0x08);
+	compass->Write(0x02 , 0x00);
 	clock->Start();
 	for(short i = 0  ;  i < 10  ;  i++){
 		base += GetGyro();
@@ -131,4 +135,23 @@ float SensorSubsystem::GetDegree(void)
 	prespeed = speed;
 	std::cout << deg << std::endl;
 	return(deg);
+}
+
+float SensorSubsystem::GetCompass(void)
+{
+	unsigned char array[4];
+	short x , y;
+	float tan;
+	for(short i = 0  ;  i < 4  ;  i++){
+		compass->Read(0x03 + i , 1 , &array[i]);
+	}
+	x = (array[0] << 8) | array[1];
+	y = (array[2] << 8) | array[3];
+	if(x){
+		tan = y;
+		tan /= x;
+		return((atan(tan) / PI * 180) + ((y > 0) ? 0 : 180));
+	}else{
+		return((y > 0) ? 90 : 270);
+	}
 }
