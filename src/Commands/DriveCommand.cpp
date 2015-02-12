@@ -7,6 +7,7 @@ DriveCommand::DriveCommand()
 	Requires(elevatorSubsystem);
 	Requires(sensorSubsystem);
 	rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed  = 0.0;
+	speed = SPEED;
 }
 
 // Called just before this Command runs the first time
@@ -19,10 +20,14 @@ void DriveCommand::Initialize()
 void DriveCommand::Execute()
 {
 	//それぞれのモーターの速度をコントローラーの状態により調整
-	rightFrontSpeed = oi->GetXplusY() * SPEED + oi->GetStickThrottle() * SPEED - oi->GetStickTwist() * SPEED;
-	leftFrontSpeed = oi->GetXminusY() * SPEED + oi->GetStickTwist() * SPEED - oi->GetStickThrottle() * SPEED;
-	rightBackSpeed = oi->GetXminusY() * SPEED + oi->GetStickThrottle() * SPEED - oi->GetStickTwist() * SPEED;
-	leftBackSpeed = oi->GetXplusY() * SPEED + oi->GetStickTwist() * SPEED - oi->GetStickThrottle() * SPEED;
+	speed = SPEED;
+	if(oi->GetStickRightButton()){
+		speed = 0.15;
+	}
+	rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
+	leftFrontSpeed = oi->GetXminusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
+	rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
+	leftBackSpeed = oi->GetXplusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
 
 	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 
