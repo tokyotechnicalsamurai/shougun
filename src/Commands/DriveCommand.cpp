@@ -1,5 +1,6 @@
 #include "DriveCommand.h"
 #include <iostream>
+#include <math.h>
 
 DriveCommand::DriveCommand()
 {
@@ -8,6 +9,8 @@ DriveCommand::DriveCommand()
 	Requires(sensorSubsystem);
 	rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed  = 0.0;
 	speed = SPEED;
+	direction = 0;
+
 }
 
 // Called just before this Command runs the first time
@@ -24,42 +27,21 @@ void DriveCommand::Execute()
 	if(oi->GetStickRightButton()){
 		speed = SLOWSPEED;
 	}
-
-	switch(CONTRLLOER_MODE){
-		//normal mode
-		case 1:{
-			rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
-			leftFrontSpeed = oi->GetXminusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
-			rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
-			leftBackSpeed = oi->GetXplusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
-			driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
-			if(elevatorSubsystem->underSwitch.Get()){
-				elevatorSubsystem->DriveElevator(-0.1);
-				Wait(0.05);
-			}else if(elevatorSubsystem->upSwitch.Get()){
-				elevatorSubsystem->DriveElevator(0.1);
-				Wait(0.05);
+	if(oi->GetSitckLeftButton()){
+		AbsAngleDriveCommand();
+	}else{
+		switch(CONTRLLOER_MODE){
+			//normal mode
+			case 1:{
+				NormalDriveCommand();
+				break;
 			}
-			elevatorSubsystem->DriveElevator(oi->GetStickRightY());
-			break;
-		}
-		//kawabata mode
-		case 2:{
-			rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickRightX()  * speed;
-			leftFrontSpeed = oi->GetXminusY() * speed - oi->GetStickRightX()  * speed;
-			rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickRightX()  * speed;
-			leftBackSpeed = oi->GetXplusY() * speed - oi->GetStickRightX()  * speed;
-			driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
-			if(elevatorSubsystem->underSwitch.Get()){
-				elevatorSubsystem->DriveElevator(-0.1);
-				Wait(0.05);
-			}else if(elevatorSubsystem->upSwitch.Get()){
-				elevatorSubsystem->DriveElevator(0.1);
-				Wait(0.05);
-			}
-			elevatorSubsystem->DriveElevator(oi->GetStickThrottle() - oi->GetStickTwist());
-			break;
+			//kawabata mode
+			case 2:{
+				KawabataDriveCommand();
+				break;
 
+			}
 		}
 	}
 
@@ -83,6 +65,64 @@ void DriveCommand::End()
 void DriveCommand::Interrupted()
 {
 
+}
+
+//Normal Command Function
+void DriveCommand::NormalDriveCommand()
+{
+	rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
+	leftFrontSpeed = oi->GetXminusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
+	rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
+	leftBackSpeed = oi->GetXplusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
+	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
+	if(elevatorSubsystem->underSwitch.Get()){
+		elevatorSubsystem->DriveElevator(-0.1);
+		Wait(0.05);
+	}else if(elevatorSubsystem->upSwitch.Get()){
+		elevatorSubsystem->DriveElevator(0.1);
+		Wait(0.05);
+	}
+	elevatorSubsystem->DriveElevator(oi->GetStickRightY());
+}
+
+//Kawabata mode Command Function
+void DriveCommand::KawabataDriveCommand()
+{
+	rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickRightX()  * speed;
+	leftFrontSpeed = oi->GetXminusY() * speed - oi->GetStickRightX()  * speed;
+	rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickRightX()  * speed;
+	leftBackSpeed = oi->GetXplusY() * speed - oi->GetStickRightX()  * speed;
+	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
+	if(elevatorSubsystem->underSwitch.Get()){
+		elevatorSubsystem->DriveElevator(-0.1);
+		Wait(0.05);
+	}else if(elevatorSubsystem->upSwitch.Get()){
+		elevatorSubsystem->DriveElevator(0.1);
+		Wait(0.05);
+	}
+	elevatorSubsystem->DriveElevator(oi->GetStickThrottle() - oi->GetStickTwist());
+}
+
+void DriveCommand::AbsAngleDriveCommand()
+{
+	float xSpeed,ySpeed,power;
+	xSpeed = oi->GetStickX();
+	ySpeed = oi->GetStickY();
+	if(ySpeed == 0 && xSpeed > 0) direction = 0;
+	else if(ySpeed == 0 && xSpeed < 0) direction = PI;
+	else if(ySpeed > 0 && xSpeed == 0) direction = PI / 2;
+	else if(ySpeed < 0 && xSpeed == 0) direction = PI * 3 / 2;
+	else direction = atan( xSpeed / ySpeed );
+
+	direction -= 0;
+	power = abs(xSpeed) + abs(ySpeed);
+	rightFrontSpeed = speed*(sin(direction) - cos(direction));
+	leftFrontSpeed = speed*(sin(direction) - cos(direction));
+	rightBackSpeed = speed*(sin(direction) - cos(direction));
+	leftBackSpeed = speed*(sin(direction) - cos(direction));
+	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
+
+	elevatorSubsystem->DriveElevator(oi->GetStickThrottle() - oi->GetStickTwist());
 }
 
 /* 	y-‘O:1,1,1,1

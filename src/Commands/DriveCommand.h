@@ -7,7 +7,7 @@
 class DriveCommand: public CommandBase
 {
 private:
-	float speed,rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed;
+	float speed,direction,rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed;
 
 public:
 	DriveCommand();
@@ -16,6 +16,9 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+	void NormalDriveCommand();
+	void KawabataDriveCommand();
+	void AbsAngleDriveCommand();
 };
 
 #endif
