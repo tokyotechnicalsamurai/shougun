@@ -8,6 +8,6 @@
 AutonomousCommandGroup::AutonomousCommandGroup()
 {
 	AddSequential(new MoveElevator(3.0,true));
-	//AddSequential(new Move2Container());
+	AddSequential(new Move2Container());
 	//AddSequential(new BringBurden());
 }

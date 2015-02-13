@@ -12,7 +12,7 @@
 
 //Controller Mode
 //1.normal 2.kawabata
-#define CONTRLLOER_MODE 1
+#define CONTRLLOER_MODE 2
 
 //Move Robot when these value is true
 #define DRIVEMOVE true
@@ -23,8 +23,8 @@
 #define SLOWSPEED 0.15 //for SLOWMODE Speed in Teleoperated Mode
 
 //Auto mode
-#define CONTAINERDIST 20.0
-#define MOVE2CONTAINERTIME 0.3
+#define CONTAINERDIST 30.0
+#define MOVE2CONTAINERTIME 1.0
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

@@ -14,7 +14,6 @@ public:
 	void End();
 	void Interrupted();
 private:
-	bool isCenter;
 	int countCenter;
 };
 
