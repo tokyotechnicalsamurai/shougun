@@ -16,6 +16,8 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+	void NormalDriveCommand();
+	void KawabataDriveCommand();
 };
 
 #endif
