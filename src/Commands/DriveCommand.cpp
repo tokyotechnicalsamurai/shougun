@@ -114,12 +114,12 @@ void DriveCommand::AbsAngleDriveCommand()
 	else if(ySpeed < 0 && xSpeed == 0) direction = PI * 3 / 2;
 	else direction = atan( xSpeed / ySpeed );
 
-	direction -= 0;
+	direction -= sensorSubsystem->GetCompass() * PI / 180.0;
 	power = abs(xSpeed) + abs(ySpeed);
-	rightFrontSpeed = speed*(sin(direction) - cos(direction));
-	leftFrontSpeed = speed*(sin(direction) - cos(direction));
-	rightBackSpeed = speed*(sin(direction) - cos(direction));
-	leftBackSpeed = speed*(sin(direction) - cos(direction));
+	rightFrontSpeed = speed * ((sin(direction) - cos(direction)*SQRT2)) * (power - oi->GetStickRightX());
+	leftFrontSpeed = speed *((sin(direction) - cos(direction)*SQRT2)) * (power + oi->GetStickRightX());
+	rightBackSpeed = speed * ((sin(direction) - cos(direction)*SQRT2)) * (power + oi->GetStickRightX());
+	leftBackSpeed = speed * ((sin(direction) - cos(direction)*SQRT2)) * (power + oi->GetStickRightX());
 	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 
 	elevatorSubsystem->DriveElevator(oi->GetStickThrottle() - oi->GetStickTwist());
