@@ -45,17 +45,10 @@ void DriveCommand::Execute()
 		}
 		//kawabata mode
 		case 2:{
-
-			int rightTurn,leftTurn;
-			if(oi->GetStickRightX() > 0){
-				rightTurn = 0;
-			}else{
-				leftTurn = 0;
-			}
-			rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickRightX() * rightTurn * speed;
-			leftFrontSpeed = oi->GetXminusY() * speed - oi->GetStickRightX() * leftTurn * speed;
-			rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickRightX() * rightTurn * speed;
-			leftBackSpeed = oi->GetXplusY() * speed - oi->GetStickRightX() * leftTurn * speed;
+			rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickRightX()  * speed;
+			leftFrontSpeed = oi->GetXminusY() * speed - oi->GetStickRightX()  * speed;
+			rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickRightX()  * speed;
+			leftBackSpeed = oi->GetXplusY() * speed - oi->GetStickRightX()  * speed;
 			driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 			if(elevatorSubsystem->underSwitch.Get()){
 				elevatorSubsystem->DriveElevator(-0.1);
