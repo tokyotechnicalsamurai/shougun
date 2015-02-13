@@ -142,8 +142,9 @@ float SensorSubsystem::GetCompass(void)
 	unsigned char array[4];
 	short x , y;
 	float X , Y;
-	for(short i = 0  ;  i < 4  ;  i++){
+	for(short i = 0  ;  i < 6  ;  i++){
 		compass->Read(0x03 + i , 1 , &array[i]);
+		if(i == 1) i += 2;
 	}
 	x = (array[0] << 8) | array[1];
 	y = (array[2] << 8) | array[3];
