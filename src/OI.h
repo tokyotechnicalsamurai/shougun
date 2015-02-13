@@ -8,6 +8,21 @@
 class OI
 {
 private:
+	//Omitted for Elevator Stick(Elevator Subsystem)
+	inline float ElevatorStickOmitted(float origin){
+		if(fabsf(origin) < 0.5){
+			origin = 0;
+		}
+		return origin;
+	}
+
+	//Omitted for LeftStick(Drive Subsystem)
+	inline float FractionOmitted(float original){
+		if(fabsf(original) < 0.01 ){
+			original = 0;
+		}
+		return original;
+	}
 
 public:
 	Joystick joystick;
@@ -28,33 +43,37 @@ public:
 		return val;
 	}
 
-	//Sticks
+	///Sticks
 	inline float GetStickX(){ return FractionOmitted(joystick.GetX()); }
 	inline float GetStickY(){ return FractionOmitted(joystick.GetY()); }
-	inline float GetStickTwist(){ return FractionOmitted(joystick.GetTwist()); }
-	inline float GetStickThrottle(){ return FractionOmitted(joystick.GetThrottle()); }
-	inline float GetStcikRightY(){ return RightStickOmitted(joystick.GetRawAxis(5)); }
-	//Button
+
+	inline float GetStickTwist(){
+		switch(CONTRLLOER_MODE){
+			case 1:
+				return FractionOmitted(joystick.GetTwist());
+			case 2:
+				return ElevatorStickOmitted(joystick.GetTwist());
+		}
+	}
+
+	inline float GetStickThrottle(){
+		switch(CONTRLLOER_MODE){
+			case 1:
+				return FractionOmitted(joystick.GetThrottle());
+			case 2:
+				return ElevatorStickOmitted(joystick.GetThrottle());
+		}
+	}
+	//for normal mode:moving of Elevator
+	inline float GetStickRightY(){ return ElevatorStickOmitted(joystick.GetRawAxis(5)); }
+	//for kawabata mode:moving of Drive turn
+	inline float GetStickRightX(){ return FractionOmitted(joystick.GetRawAxis(4)); }
+
+	/// Button
 	inline bool GetSitckLeftButton(){ return joystick.GetRawButton(5); }
 	inline bool GetStickRightButton(){ return joystick.GetRawButton(6); }
 	//Ureget button
 	inline bool GetUregetButton(){ return joystick.GetRawButton(7) && joystick.GetRawButton(8); }
-
-	//Omitted for RightStick(Elevator Subsystem)
-	inline float RightStickOmitted(float origin){
-		if(fabsf(origin) < 0.5){
-			origin = 0;
-		}
-		return origin;
-	}
-
-	//Omitted for LeftStick(Drive Subsystem)
-	inline float FractionOmitted(float original){
-		if(fabsf(original) < 0.01 ){
-			original = 0;
-		}
-		return original;
-	}
 
 };
 
