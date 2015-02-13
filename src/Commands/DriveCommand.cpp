@@ -28,36 +28,12 @@ void DriveCommand::Execute()
 	switch(CONTRLLOER_MODE){
 		//normal mode
 		case 1:{
-			rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
-			leftFrontSpeed = oi->GetXminusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
-			rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
-			leftBackSpeed = oi->GetXplusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
-			driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
-			if(elevatorSubsystem->underSwitch.Get()){
-				elevatorSubsystem->DriveElevator(-0.1);
-				Wait(0.05);
-			}else if(elevatorSubsystem->upSwitch.Get()){
-				elevatorSubsystem->DriveElevator(0.1);
-				Wait(0.05);
-			}
-			elevatorSubsystem->DriveElevator(oi->GetStickRightY());
+			NormalDriveCommand();
 			break;
 		}
 		//kawabata mode
 		case 2:{
-			rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickRightX()  * speed;
-			leftFrontSpeed = oi->GetXminusY() * speed - oi->GetStickRightX()  * speed;
-			rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickRightX()  * speed;
-			leftBackSpeed = oi->GetXplusY() * speed - oi->GetStickRightX()  * speed;
-			driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
-			if(elevatorSubsystem->underSwitch.Get()){
-				elevatorSubsystem->DriveElevator(-0.1);
-				Wait(0.05);
-			}else if(elevatorSubsystem->upSwitch.Get()){
-				elevatorSubsystem->DriveElevator(0.1);
-				Wait(0.05);
-			}
-			elevatorSubsystem->DriveElevator(oi->GetStickThrottle() - oi->GetStickTwist());
+			KawabataDriveCommand();
 			break;
 
 		}
@@ -83,6 +59,42 @@ void DriveCommand::End()
 void DriveCommand::Interrupted()
 {
 
+}
+
+//Normal Command Function
+void DriveCommand::NormalDriveCommand()
+{
+	rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
+	leftFrontSpeed = oi->GetXminusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
+	rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
+	leftBackSpeed = oi->GetXplusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
+	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
+	if(elevatorSubsystem->underSwitch.Get()){
+		elevatorSubsystem->DriveElevator(-0.1);
+		Wait(0.05);
+	}else if(elevatorSubsystem->upSwitch.Get()){
+		elevatorSubsystem->DriveElevator(0.1);
+		Wait(0.05);
+	}
+	elevatorSubsystem->DriveElevator(oi->GetStickRightY());
+}
+
+//Kawabata mode Command Function
+void DriveCommand::KawabataDriveCommand()
+{
+	rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickRightX()  * speed;
+	leftFrontSpeed = oi->GetXminusY() * speed - oi->GetStickRightX()  * speed;
+	rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickRightX()  * speed;
+	leftBackSpeed = oi->GetXplusY() * speed - oi->GetStickRightX()  * speed;
+	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
+	if(elevatorSubsystem->underSwitch.Get()){
+		elevatorSubsystem->DriveElevator(-0.1);
+		Wait(0.05);
+	}else if(elevatorSubsystem->upSwitch.Get()){
+		elevatorSubsystem->DriveElevator(0.1);
+		Wait(0.05);
+	}
+	elevatorSubsystem->DriveElevator(oi->GetStickThrottle() - oi->GetStickTwist());
 }
 
 /* 	y-‘O:1,1,1,1
