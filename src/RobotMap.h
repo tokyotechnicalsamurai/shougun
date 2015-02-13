@@ -9,6 +9,7 @@
 
 //Math Setting
 #define PI 3.141592
+#define SQRT2 1.414213
 
 //Controller Mode
 //1.normal 2.kawabata
