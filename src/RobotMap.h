@@ -3,12 +3,21 @@
 
 #include "WPILib.h"
 
-//コントローラーから入ってくる値に掛ける数
-//これを大きくすることでスピードを早くすることが出来る
+/**
+ * For Teleoperated Mode
+ */
+
+//Controller Mode
+//1.normal 2.kawabata
+#define CONTRLLOER_MODE 1
+
+//Move Robot when these value is true
 #define DRIVEMOVE true
 #define ELEVATORMOVE true
 
-#define SPEED 0.3
+//SPEED Setting
+#define SPEED 0.3 //for normal Speed in Teleoperated Mode
+#define SLOWSPEED 0.15 //for SLOWMODE Speed in Teleoperated Mode
 
 //Auto mode
 #define CONTAINERDIST 20.0
