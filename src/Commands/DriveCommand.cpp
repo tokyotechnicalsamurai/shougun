@@ -22,41 +22,60 @@ void DriveCommand::Execute()
 	//それぞれのモーターの速度をコントローラーの状態により調整
 	speed = SPEED;
 	if(oi->GetStickRightButton()){
-		speed = 0.15;
+		speed = SLOWSPEED;
 	}
-	rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
-	leftFrontSpeed = oi->GetXminusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
-	rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
-	leftBackSpeed = oi->GetXplusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
 
-	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
+	switch(CONTRLLOER_MODE){
+		//normal mode
+		case 1:{
+			rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
+			leftFrontSpeed = oi->GetXminusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
+			rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
+			leftBackSpeed = oi->GetXplusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
+			driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
+			if(elevatorSubsystem->underSwitch.Get()){
+				elevatorSubsystem->DriveElevator(-0.1);
+				Wait(0.05);
+			}else if(elevatorSubsystem->upSwitch.Get()){
+				elevatorSubsystem->DriveElevator(0.1);
+				Wait(0.05);
+			}
+			elevatorSubsystem->DriveElevator(oi->GetStickRightY());
+			break;
+		}
+		//kawabata mode
+		case 2:{
+			rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickRightX()  * speed;
+			leftFrontSpeed = oi->GetXminusY() * speed - oi->GetStickRightX()  * speed;
+			rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickRightX()  * speed;
+			leftBackSpeed = oi->GetXplusY() * speed - oi->GetStickRightX()  * speed;
+			driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
+			if(elevatorSubsystem->underSwitch.Get()){
+				elevatorSubsystem->DriveElevator(-0.1);
+				Wait(0.05);
+			}else if(elevatorSubsystem->upSwitch.Get()){
+				elevatorSubsystem->DriveElevator(0.1);
+				Wait(0.05);
+			}
+			elevatorSubsystem->DriveElevator(oi->GetStickThrottle() - oi->GetStickTwist());
+			break;
 
-	if(elevatorSubsystem->underSwitch.Get()){
-		elevatorSubsystem->DriveElevator(-0.1);
-		Wait(0.05);
-	}else if(elevatorSubsystem->upSwitch.Get()){
-		elevatorSubsystem->DriveElevator(0.1);
-		Wait(0.05);
+		}
 	}
-	if(elevatorSubsystem->underSwitch.Get() && oi->GetStcikRightY() > 0){
-		elevatorSubsystem->DriveElevator(0);
-	}else if(elevatorSubsystem->upSwitch.Get() && oi->GetStcikRightY() < 0){
-		elevatorSubsystem->DriveElevator(0);
-	}else{
-		elevatorSubsystem->DriveElevator(oi->GetStcikRightY());
-	}
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveCommand::IsFinished()
 {
-	return false;
+	return oi->GetUregetButton();
 }
 
 // Called once after isFinished returns true
 void DriveCommand::End()
 {
-
+	driveSubsystem->Stop();
+	elevatorSubsystem->DriveElevator(0);
 }
 
 // Called when another command which requires one or more of the same
