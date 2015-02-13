@@ -7,6 +7,9 @@
  * For Teleoperated Mode
  */
 
+//Math Setting
+#define PI 3.141592
+
 //Controller Mode
 //1.normal 2.kawabata
 #define CONTRLLOER_MODE 1
