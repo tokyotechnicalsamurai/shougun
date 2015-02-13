@@ -3,11 +3,15 @@
 BringBurden::BringBurden()
 {
 	Requires(driveSubsystem);
+	Requires(sensorSubsystem);
+	firstZValue = secondZValue =  0;
+	ZChangeCount = 0;
 }
 
 // Called just before this Command runs the first time
 void BringBurden::Initialize()
 {
+	firstZValue = sensorSubsystem->GetZacceleration();
 	SetTimeout(5.0);
 }
 

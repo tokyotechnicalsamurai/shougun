@@ -6,6 +6,9 @@
 
 class BringBurden: public CommandBase
 {
+private:
+	float firstZValue,secondZValue;
+	int ZChangeCount;
 public:
 	BringBurden();
 	void Initialize();

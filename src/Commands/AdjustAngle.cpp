@@ -2,8 +2,6 @@
 
 AdjustAngle::AdjustAngle()
 {
-	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(chassis);
 	Requires(driveSubsystem);
 	Requires(sensorSubsystem);
 	rightDist = leftDist = 0;
