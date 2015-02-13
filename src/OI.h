@@ -64,16 +64,17 @@ public:
 				return ElevatorStickOmitted(joystick.GetThrottle());
 		}
 	}
-	//for normal mode:moving of Elevator
-	inline float GetStickRightY(){ return ElevatorStickOmitted(joystick.GetRawAxis(5)); }
+
 	//for kawabata mode:moving of Drive turn
-	inline float GetStickRightX(){ return FractionOmitted(joystick.GetRawAxis(4)); }
+	inline float GetStickRightX(){ return FractionOmitted(joystick.GetRawAxis(RIGHT_X_STICK)); }
+	//for normal mode:moving of Elevator
+	inline float GetStickRightY(){ return ElevatorStickOmitted(joystick.GetRawAxis(RIGHT_Y_STICK)); }
 
 	/// Button
-	inline bool GetSitckLeftButton(){ return joystick.GetRawButton(5); }
-	inline bool GetStickRightButton(){ return joystick.GetRawButton(6); }
+	inline bool GetSitckLeftButton(){ return joystick.GetRawButton(L_BUTTON); }
+	inline bool GetStickRightButton(){ return joystick.GetRawButton(R_BUTTON); }
 	//Ureget button
-	inline bool GetUregetButton(){ return joystick.GetRawButton(7) && joystick.GetRawButton(8); }
+	inline bool GetUregetButton(){ return joystick.GetRawButton(BACK_BUTTON) && joystick.GetRawButton(START_BUTTON); }
 
 };
 

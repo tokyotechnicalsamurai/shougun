@@ -33,6 +33,24 @@
 //JoyStick
 const int JOYSTICK = 0;
 
+//Controller Button
+const int A_BUTTON = 1;
+const int B_BUTTON = 2;
+const int X_BUTTON = 3;
+const int Y_BUTTON = 4;
+const int L_BUTTON = 5;
+const int R_BUTTON = 6;
+const int BACK_BUTTON = 7;
+const int START_BUTTON = 8;
+
+//Controller Sticks
+const int LEFT_X_STICK = 0;
+const int LEFT_Y_STICK = 1;
+const int L_STICK = 2;
+const int R_STICK = 3;
+const int RIGHT_X_STICK = 4;
+const int RIGHT_Y_STICK = 5;
+
 //Motors
 const int RIGHT_FRONT = 0;
 const int LEFT_FRONT = 1;
