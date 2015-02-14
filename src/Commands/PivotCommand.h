@@ -8,7 +8,7 @@ class PivotCommand: public CommandBase
 {
 private:
 	bool isRightPovit,isFinishPovit;
-	int povitAngle;
+
 public:
 	PivotCommand(bool isRight,int Angle);
 	void Initialize();

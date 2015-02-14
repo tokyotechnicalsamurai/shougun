@@ -30,10 +30,11 @@ void DriveCommand::Execute()
 	if(oi->GetStickRightButton()){
 		speed = SLOWSPEED;
 	}
-
+	/*
 	if(oi->GetSitckLeftButton()){
 		AbsAngleDriveCommand();
-	}else if(oi->GetStickPov() != -1){
+	}else */
+	if(oi->GetStickPov() != -1){
 		POVAngleDriveCommand(oi->GetStickPov());
 	}else{
 		switch(CONTRLLOER_MODE){
@@ -70,6 +71,8 @@ void DriveCommand::End()
 // subsystems is scheduled to run
 void DriveCommand::Interrupted()
 {
+	driveSubsystem->Stop();
+	elevatorSubsystem->DriveElevator(0);
 
 }
 

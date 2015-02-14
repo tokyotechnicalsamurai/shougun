@@ -69,7 +69,7 @@ const int PULL_MOTOR_RIGHT = 4;
 const int PULL_MOTOR_LEFT = 5;
 
 //Analog Sensors
-const int GYRO_SENSOR = 0;
+const int GYRO_SENSOR = 3;
 const int DIST_RIGHT = 1;
 const int DIST_LEFT = 2;
 

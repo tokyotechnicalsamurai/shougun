@@ -37,7 +37,7 @@ void SensorSubsystem::InitDefaultCommand()
 
 int SensorSubsystem::GetGyro(void)
 {
-	return(gyro.GetValue());
+	return(gyro.GetVoltage());
 }
 
 //Dist sensor is unsustainable, so we may calculate average value.
