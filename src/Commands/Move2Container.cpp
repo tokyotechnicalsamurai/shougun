@@ -5,14 +5,15 @@ Move2Container::Move2Container()
 {
 	Requires(driveSubsystem);
 	Requires(sensorSubsystem);
-	isCenter = false;
 	countCenter = 0;
 }
 
 // Called just before this Command runs the first time
 void Move2Container::Initialize()
 {
-
+	driveSubsystem->DriveMotors(0.1,0.1,0.1,0.1);
+	Wait(BACKTIME);
+	SetTimeout(6.0);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -24,17 +25,18 @@ void Move2Container::Execute()
 		countCenter = 0;
 	}
 	if(countCenter >= 10){
-		isCenter = false;
+		std::cout << "Success!" << std::endl;
 		SetTimeout(MOVE2CONTAINERTIME);
 	}
 	driveSubsystem->DriveMotors(0.3,-0.3,-0.3,0.3);
+	std::cout << "Right" << sensorSubsystem->GetDistRight() << "  Left" << sensorSubsystem->GetDistLeft() << std::endl;
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool Move2Container::IsFinished()
 {
-	return isCenter && IsTimedOut();
+	return  IsTimedOut();
 }
 
 // Called once after isFinished returns true

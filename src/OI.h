@@ -18,7 +18,7 @@ private:
 
 	//Omitted for LeftStick(Drive Subsystem)
 	inline float FractionOmitted(float original){
-		if(fabsf(original) < 0.01 ){
+		if(fabsf(original) < 0.2 ){
 			original = 0;
 		}
 		return original;

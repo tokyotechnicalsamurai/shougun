@@ -1,20 +1,22 @@
-#ifndef Move2Container_H
-#define Move2Container_H
+#ifndef AdjustAngle_H
+#define AdjustAngle_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class Move2Container: public CommandBase
+class AdjustAngle: public CommandBase
 {
+private:
+	float rightDist,leftDist;
+	bool isStraighten;
+
 public:
-	Move2Container();
+	AdjustAngle();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
-private:
-	int countCenter;
 };
 
 #endif
