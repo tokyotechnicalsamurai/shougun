@@ -129,14 +129,14 @@ void DriveCommand::AbsAngleDriveCommand()
 void DriveCommand::POVAngleDriveCommand(int angle){
 	switch(angle){
 		case 0:
-			rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed = speed;
+			rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed = -speed;
 			break;
 		case 90:
 			rightFrontSpeed = leftBackSpeed = speed;
 			leftFrontSpeed = rightBackSpeed = -speed;
 			break;
 		case 180:
-			rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed = -speed;
+			rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed = speed;
 			break;
 		case 270:
 			rightFrontSpeed = leftBackSpeed = -speed;
