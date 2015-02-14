@@ -9,12 +9,12 @@ class SensorSubsystem: public Subsystem
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	AnalogInput* gyro;
-	AnalogInput* dist_left;
-	AnalogInput* dist_right;
-	I2C* acceleration;
-	I2C* compass;
-	Timer* clock;
+	AnalogInput gyro;
+	AnalogInput dist_left;
+	AnalogInput dist_right;
+	I2C acceleration;
+	I2C compass;
+	Timer clock;
 	float deg;
 	float base;
 	float prespeed;
@@ -26,6 +26,7 @@ public:
 	int GetXacceleration(void);
 	int GetYacceleration(void);
 	int GetZacceleration(void);
+	void AccelerationTest(void);
 	float GetDistLeft(void);
 	float GetDistRight(void);
 	float GetDegree(void);
