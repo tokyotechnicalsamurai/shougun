@@ -19,6 +19,7 @@ public:
 	void NormalDriveCommand();
 	void KawabataDriveCommand();
 	void AbsAngleDriveCommand();
+	void POVAngleDriveCommand(int angle);
 };
 
 #endif
