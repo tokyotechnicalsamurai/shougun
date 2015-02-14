@@ -23,9 +23,11 @@
 #define SPEED 0.3 //for normal Speed in Teleoperated Mode
 #define SLOWSPEED 0.15 //for SLOWMODE Speed in Teleoperated Mode
 
-//Auto mode
-#define CONTAINERDIST 30.0
-#define MOVE2CONTAINERTIME 1.0
+///Auto mode
+//Move2Container Command Setting
+#define BACKTIME 0.5
+#define CONTAINERDIST 45.0
+#define MOVE2CONTAINERTIME 0.7
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

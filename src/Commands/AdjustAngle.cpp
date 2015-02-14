@@ -24,12 +24,13 @@ void AdjustAngle::Execute()
 	if(abs(rightDist - leftDist) < 5){
 		isStraighten = true;
 	}else{
-		if(rightDist > leftDist){
-			driveSubsystem->DriveMotors(SPEED,0,SPEED,0);
+		if(rightDist < leftDist){
+			driveSubsystem->DriveMotors(0,-SPEED,0,-SPEED);
 		}else{
-			driveSubsystem->DriveMotors(0,SPEED,0,SPEED);
+			driveSubsystem->DriveMotors(-SPEED,0,-SPEED,0);
 		}
 	}
+	std::cout << "AdjutMode:::: Right" << sensorSubsystem->GetDistRight() << "  Left" << sensorSubsystem->GetDistLeft() << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

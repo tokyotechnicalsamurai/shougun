@@ -11,6 +11,8 @@ Move2Container::Move2Container()
 // Called just before this Command runs the first time
 void Move2Container::Initialize()
 {
+	driveSubsystem->DriveMotors(0.1,0.1,0.1,0.1);
+	Wait(BACKTIME);
 	SetTimeout(6.0);
 }
 
