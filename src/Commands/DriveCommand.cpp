@@ -20,6 +20,7 @@ void DriveCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveCommand::Execute()
 {
+
 	speed = SPEED;
 	if(oi->GetStickRightButton()){
 		speed = SLOWSPEED;

@@ -70,8 +70,10 @@ public:
 	//for normal mode:moving of Elevator
 	inline float GetStickRightY(){ return ElevatorStickOmitted(joystick.GetRawAxis(RIGHT_Y_STICK)); }
 
-	/// Button
-	inline bool GetSitckLeftButton(){ return joystick.GetRawButton(L_BUTTON); }
+	/// POV
+	inline int GetStickPov(){ return joystick.GetPOV(); }
+	/*  Button */
+ 	inline bool GetSitckLeftButton(){ return joystick.GetRawButton(L_BUTTON); }
 	inline bool GetStickRightButton(){ return joystick.GetRawButton(R_BUTTON); }
 	//Ureget button
 	inline bool GetUregetButton(){ return joystick.GetRawButton(BACK_BUTTON) && joystick.GetRawButton(START_BUTTON); }
