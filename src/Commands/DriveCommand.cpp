@@ -10,6 +10,7 @@ DriveCommand::DriveCommand()
 	rightFrontSpeed = leftFrontSpeed = rightBackSpeed = leftBackSpeed  = 0.0;
 	speed = SPEED;
 	direction = 0;
+	isFinishAdjust = false;
 }
 
 // Called just before this Command runs the first time
@@ -20,7 +21,11 @@ void DriveCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveCommand::Execute()
 {
-
+	std::cout << "Right" << sensorSubsystem->GetDistRight() << "  Left" << sensorSubsystem->GetDistLeft() << std::endl;
+	while(oi->GetButton(A_BUTTON) && !isFinishAdjust){
+		AdjustAngle();
+	}
+	isFinishAdjust = false;
 	speed = SPEED;
 	if(oi->GetStickRightButton()){
 		speed = SLOWSPEED;
@@ -65,6 +70,22 @@ void DriveCommand::End()
 // subsystems is scheduled to run
 void DriveCommand::Interrupted()
 {
+
+}
+
+void DriveCommand::AdjustAngle(){
+	float rightDist,leftDist;
+	rightDist = sensorSubsystem->GetDistRight();
+	leftDist = sensorSubsystem->GetDistLeft();
+	if(abs(rightDist - leftDist) < 2){
+		isFinishAdjust = true;
+	}else{
+		if(rightDist < leftDist){
+			driveSubsystem->DriveMotors(0,-SPEED,0,-SPEED);
+		}else{
+			driveSubsystem->DriveMotors(-SPEED,0,-SPEED,0);
+		}
+	}
 
 }
 

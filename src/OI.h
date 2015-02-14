@@ -26,6 +26,8 @@ private:
 
 public:
 	Joystick joystick;
+	Joystick *stick4Button;
+	JoystickButton *AButton,*BButton,*XButton;
 	OI();
 
 	inline float GetXplusY(){
@@ -73,11 +75,11 @@ public:
 	/// POV
 	inline int GetStickPov(){ return joystick.GetPOV(); }
 	/*  Button */
+	inline bool GetButton(int button){ return joystick.GetRawButton(button); }
  	inline bool GetSitckLeftButton(){ return joystick.GetRawButton(L_BUTTON); }
 	inline bool GetStickRightButton(){ return joystick.GetRawButton(R_BUTTON); }
 	//Ureget button
 	inline bool GetUregetButton(){ return joystick.GetRawButton(BACK_BUTTON) && joystick.GetRawButton(START_BUTTON); }
-
 };
 
 #endif

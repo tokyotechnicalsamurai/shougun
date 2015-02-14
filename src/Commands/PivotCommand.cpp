@@ -37,7 +37,7 @@ void PivotCommand::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool PivotCommand::IsFinished()
 {
-	return isFinishPovit;
+	return isFinishPovit || oi->GetUregetButton();
 }
 
 // Called once after isFinished returns true
