@@ -1,25 +1,29 @@
 #include "BringBurden.h"
 #include "../RobotMap.h"
 
-BringBurden::BringBurden()
+BringBurden::BringBurden(float time,bool isFront)
 {
 	Requires(driveSubsystem);
 	Requires(sensorSubsystem);
-	firstZValue = secondZValue =  0;
-	ZChangeCount = 0;
+	moveTime = time;
+	front = isFront;
+
 }
 
 // Called just before this Command runs the first time
 void BringBurden::Initialize()
 {
-	firstZValue = sensorSubsystem->GetZacceleration();
-	SetTimeout(MOVETIME);
+	SetTimeout(moveTime);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void BringBurden::Execute()
 {
-	driveSubsystem->DriveMotors(-MOVESPEED,-MOVESPEED,-MOVESPEED,-MOVESPEED);
+	if(front){
+		driveSubsystem->DriveMotors(-MOVESPEED,-MOVESPEED,-MOVESPEED,-MOVESPEED);
+	}else{
+		driveSubsystem->DriveMotors(BACKMOVESPEED,BACKMOVESPEED,BACKMOVESPEED,BACKMOVESPEED);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
