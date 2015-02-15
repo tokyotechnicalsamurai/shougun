@@ -22,7 +22,6 @@ PivotCommand::PivotCommand(float Angle , bool state , bool state2/* , bool state
 // Called just before this Command runs the first time
 void PivotCommand::Initialize()
 {
-	std::cout << "hello world\n";
 	SetTimeout(2);
 }
 
@@ -32,7 +31,6 @@ void PivotCommand::Execute()
 	Timer* clock = new Timer();
 	float deg , base , prespeed , beforetime , starttime;
 
-	std::cout << "wey soiya\n";
 	clock->Start();
 	deg = 0;
 	base = 0;
@@ -40,11 +38,12 @@ void PivotCommand::Execute()
 	for(short i = 0  ;  i < 10  ;  i++){
 		base += sensorSubsystem->GetGyro();
 	}
+	Wait(0.1);
 	base /= 10.0;
 	starttime = clock->Get();
 	beforetime = clock->Get();
 
-	while(!isFinishPovit || !IsTimedOut()){
+	while(!isFinishPovit){
 		float data = 0;
 		float time , speed;
 
@@ -53,7 +52,7 @@ void PivotCommand::Execute()
 		}
 		data /= 10.0;
 		data -= base;
-		if(-0.006 < data  &&  data < 0.006) data = 0;
+		if(-0.005 < data  &&  data < 0.005) data = 0;
 		speed = data / 0.0067;
 		time = clock->Get() - beforetime;
 		beforetime = clock->Get();
@@ -63,15 +62,17 @@ void PivotCommand::Execute()
 
 		if(!parallel_state){
 			if(isRightPovit){
-				if(sensorSubsystem->GetDegree() > -90){
-					driveSubsystem->DriveMotors(SPEED,-SPEED,SPEED,-SPEED);
+				if(deg > povitAngle){
+					driveSubsystem->DriveMotors(0.35 , -0.35 , 0.35 , -0.35);
 				}else{
+					std::cout << "coming1\n";
 					isFinishPovit = true;
 				}
 			}else{
-				if(sensorSubsystem->GetDegree() < 90){
-					driveSubsystem->DriveMotors(-SPEED,SPEED,-SPEED,SPEED);
+				if(deg < povitAngle){
+					driveSubsystem->DriveMotors(-0.35 , 0.35 , -0.35 , 0.35);
 				}else{
+					std::cout << "coming2\n";
 					isFinishPovit = true;
 				}
 			}
@@ -100,7 +101,7 @@ void PivotCommand::Execute()
 
 		Wait(0.01);
 	}
-	std::cout << "finish\n";
+	std::cout << povitAngle << "   finish\n";
 
 }
 
@@ -115,6 +116,7 @@ void PivotCommand::End()
 {
 	driveSubsystem->Stop();
 	std::cout << "End" << std::endl;
+	isFinishPovit = false;
 }
 
 // Called when another command which requires one or more of the same
