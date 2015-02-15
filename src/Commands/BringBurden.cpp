@@ -1,4 +1,5 @@
 #include "BringBurden.h"
+#include "../RobotMap.h"
 
 BringBurden::BringBurden()
 {
@@ -12,13 +13,13 @@ BringBurden::BringBurden()
 void BringBurden::Initialize()
 {
 	firstZValue = sensorSubsystem->GetZacceleration();
-	SetTimeout(5.0);
+	SetTimeout(MOVETIME);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void BringBurden::Execute()
 {
-	driveSubsystem->DriveMotors(0.3,0.3,0.3,0.3);
+	driveSubsystem->DriveMotors(-MOVESPEED,-MOVESPEED,-MOVESPEED,-MOVESPEED);
 }
 
 // Make this return true when this Command no longer needs to run execute()

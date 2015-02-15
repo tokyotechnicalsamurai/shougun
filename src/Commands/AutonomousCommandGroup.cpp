@@ -14,6 +14,6 @@ AutonomousCommandGroup::AutonomousCommandGroup()
 	AddSequential(new MoveElevator(3.0,true));
 	AddSequential(new Move2Container());
 	AddSequential(new AdjustAngle());
-	//AddSequential(new BringBurden());
+	AddSequential(new BringBurden());
 
 }
