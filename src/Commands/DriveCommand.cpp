@@ -95,10 +95,10 @@ void DriveCommand::AdjustAngle(){
 //Normal Command Function
 void DriveCommand::NormalDriveCommand()
 {
-	rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
-	leftFrontSpeed = oi->GetXminusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
-	rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
-	leftBackSpeed = oi->GetXplusY() * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
+	rightFrontSpeed = pow(oi->GetXplusY(),3.0) * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
+	leftFrontSpeed = pow(oi->GetXminusY(),3.0) * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
+	rightBackSpeed = pow(oi->GetXminusY(),3.0) * speed + oi->GetStickThrottle() * speed - oi->GetStickTwist() * speed;
+	leftBackSpeed = pow(oi->GetXplusY(),3.0) * speed + oi->GetStickTwist() * speed - oi->GetStickThrottle() * speed;
 	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 	if(elevatorSubsystem->underSwitch.Get()){
 		elevatorSubsystem->DriveElevator(-0.1);
@@ -125,7 +125,7 @@ void DriveCommand::KawabataDriveCommand()
 		elevatorSubsystem->DriveElevator(0.1);
 		Wait(0.05);
 	}
-	elevatorSubsystem->DriveElevator(oi->GetStickThrottle() - oi->GetStickTwist());
+	elevatorSubsystem->DriveElevator(oi->GetStickTwist() - oi->GetStickThrottle() );
 }
 
 void DriveCommand::AbsAngleDriveCommand()
