@@ -6,12 +6,14 @@
 //Command and CommandGroup
 #include "Commands/DriveCommand.h"
 #include "Commands/AutonomousCommandGroup.h"
+#include "Commands/PivotCommand.h"
 
 class Robot: public IterativeRobot
 {
 private:
 	Command *autonomousCommand;
 	Command *driveCommand;
+	Command *pivotCommand;
 	LiveWindow *lw;
 
 	void RobotInit()
@@ -19,6 +21,7 @@ private:
 		CommandBase::init();
 		autonomousCommand = new AutonomousCommandGroup();
 		driveCommand = new DriveCommand();
+		pivotCommand = new PivotCommand(90);
 		//Camera Capture send to Dashboard
 		CameraServer::GetInstance()->SetQuality(50);
 		CameraServer::GetInstance()->StartAutomaticCapture("cam1");
@@ -33,8 +36,10 @@ private:
 
 	void AutonomousInit()
 	{
-		if (autonomousCommand != NULL)
-			autonomousCommand->Start();
+		if (autonomousCommand != NULL){
+			pivotCommand->Start();
+//			autonomousCommand->Start();
+		}
 	}
 
 	void AutonomousPeriodic()

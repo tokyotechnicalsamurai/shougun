@@ -1,6 +1,6 @@
 #include "PivotCommand.h"
 
-PivotCommand::PivotCommand(float Angle , bool state , bool state2)
+PivotCommand::PivotCommand(float Angle , bool state , bool state2/* , bool state3*/)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -22,6 +22,7 @@ PivotCommand::PivotCommand(float Angle , bool state , bool state2)
 // Called just before this Command runs the first time
 void PivotCommand::Initialize()
 {
+	std::cout << "hello world\n";
 	SetTimeout(2);
 }
 
@@ -31,6 +32,7 @@ void PivotCommand::Execute()
 	Timer* clock = new Timer();
 	float deg , base , prespeed , beforetime , starttime;
 
+	std::cout << "wey soiya\n";
 	clock->Start();
 	deg = 0;
 	base = 0;
@@ -57,7 +59,7 @@ void PivotCommand::Execute()
 		beforetime = clock->Get();
 		deg += (prespeed + speed) / 2.0 * time;
 		prespeed = speed;
-		std::cout << deg << std::endl;
+		std::cout << "deg : " <<  deg << std::endl;
 
 		if(!parallel_state){
 			if(isRightPovit){

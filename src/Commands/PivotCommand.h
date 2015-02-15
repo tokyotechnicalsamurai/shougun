@@ -12,9 +12,10 @@ private:
 	bool isRightPovit,isFinishPovit;
 	bool parallel_state;//true:parallel movement , false:turn setted degree
 	bool dist_state;//true:look distance and stop , false:not look distance
+//	bool control_state;
 
 public:
-	PivotCommand(float , bool = false , bool = false);
+	PivotCommand(float , bool = false , bool = false/* , bool = false*/);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
