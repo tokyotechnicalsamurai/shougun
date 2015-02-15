@@ -21,10 +21,10 @@ void AdjustAngle::Execute()
 {
 	rightDist = sensorSubsystem->GetDistRight();
 	leftDist = sensorSubsystem->GetDistLeft();
-	if(abs(rightDist - leftDist) < 5){
+	if(abs(rightDist - (leftDist - 7)) < 5){
 		isStraighten = true;
 	}else{
-		if(rightDist < leftDist){
+		if(rightDist < (leftDist - 7)){
 			driveSubsystem->DriveMotors(0,-SPEED,0,-SPEED);
 		}else{
 			driveSubsystem->DriveMotors(-SPEED,0,-SPEED,0);

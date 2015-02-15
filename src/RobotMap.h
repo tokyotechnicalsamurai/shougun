@@ -25,9 +25,9 @@
 
 ///Auto mode
 //Move2Container Command Setting
-#define BACKTIME 0.5
+#define BACKTIME 0.3
 #define CONTAINERDIST 45.0
-#define MOVE2CONTAINERTIME 0.7
+#define MOVE2CONTAINERTIME 0.5
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
