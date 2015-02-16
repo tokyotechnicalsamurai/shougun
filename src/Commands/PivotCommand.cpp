@@ -84,11 +84,11 @@ void PivotCommand::Execute()
 				gap = ((gap > 0) ? 0.1 : -0.1);
 			}
 			if(isRightPovit){
-				driveSubsystem->DriveMotors(SPEED + gap , -SPEED + gap , -SPEED + gap , SPEED + gap);
+				driveSubsystem->DriveMotors(-(MOVESPEED + gap) , -(MOVESPEED - gap) , -(MOVESPEED + gap) , -(MOVESPEED - gap));
 			}else{
-				driveSubsystem->DriveMotors(-SPEED + gap , SPEED + gap , SPEED + gap , -SPEED + gap);
+				driveSubsystem->DriveMotors(-(MOVESPEED + gap) , -(MOVESPEED - gap) , -(MOVESPEED + gap) , -(MOVESPEED - gap));
 			}
-			if(IsTimedOut()  ||  clock->Get() - starttime > 2.0) break;
+			if(clock->Get() - starttime > breaktime) isFinishPovit = true;
 			if(dist_state){
 				float left , right;
 				left = sensorSubsystem->GetDistLeft();
@@ -108,7 +108,7 @@ void PivotCommand::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool PivotCommand::IsFinished()
 {
-	return isFinishPovit || oi->GetUregetButton() || IsTimedOut();
+	return isFinishPovit || oi->GetUregetButton();
 }
 
 // Called once after isFinished returns true
