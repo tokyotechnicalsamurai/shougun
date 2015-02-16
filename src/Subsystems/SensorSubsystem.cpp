@@ -35,7 +35,7 @@ void SensorSubsystem::InitDefaultCommand()
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
-int SensorSubsystem::GetGyro(void)
+float SensorSubsystem::GetGyro(void)
 {
 	return(gyro.GetVoltage());
 }
