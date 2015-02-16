@@ -34,7 +34,7 @@
 //BringBurden Command Setting
 #define MOVETIME 5.0
 #define MOVESPEED 0.3
-#define BACKMOVESPEED 0.2
+#define BACKMOVESPEED 0.15
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

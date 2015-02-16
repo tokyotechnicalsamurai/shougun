@@ -15,6 +15,6 @@ AutonomousCommandGroup::AutonomousCommandGroup()
 	AddSequential(new AdjustAngle());
 	AddSequential(new BringBurden(5.0,true));
 	AddSequential(new PivotCommand(-90));
-	AddSequential(new MoveElevator(2.0,false));
+	AddParallel(new MoveElevator(2.0,false));
 	AddSequential(new BringBurden(2.0,false));
 }
