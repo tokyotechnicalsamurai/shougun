@@ -35,11 +35,13 @@ void PivotCommand::Execute()
 	deg = 0;
 	base = 0;
 	prespeed = 0;
+	Wait(0.2);
 	for(short i = 0  ;  i < 10  ;  i++){
 		base += sensorSubsystem->GetGyro();
+		std::cout << sensorSubsystem->GetGyro() << std::endl;
 	}
-	Wait(0.1);
 	base /= 10.0;
+	std::cout << "base " << base << std::endl;
 	starttime = clock->Get();
 	beforetime = clock->Get();
 
@@ -50,6 +52,7 @@ void PivotCommand::Execute()
 		for(short i = 0  ;  i < 10  ;  i++){
 			data += sensorSubsystem->GetGyro();
 		}
+		std::cout << "data : " << data;
 		data /= 10.0;
 		data -= base;
 		if(-0.005 < data  &&  data < 0.005) data = 0;
@@ -58,7 +61,7 @@ void PivotCommand::Execute()
 		beforetime = clock->Get();
 		deg += (prespeed + speed) / 2.0 * time;
 		prespeed = speed;
-		std::cout << "deg : " <<  deg << std::endl;
+		std::cout << "  deg : " <<  deg << std::endl;
 
 		if(!parallel_state){
 			if(isRightPovit){
@@ -83,12 +86,8 @@ void PivotCommand::Execute()
 			}else{
 				gap = ((gap > 0) ? 0.1 : -0.1);
 			}
-			if(isRightPovit){
-				driveSubsystem->DriveMotors(SPEED + gap , -SPEED + gap , -SPEED + gap , SPEED + gap);
-			}else{
-				driveSubsystem->DriveMotors(-SPEED + gap , SPEED + gap , SPEED + gap , -SPEED + gap);
-			}
-			if(IsTimedOut()  ||  clock->Get() - starttime > 2.0) break;
+			driveSubsystem->DriveMotors(-(MOVESPEED - gap) , -(MOVESPEED + gap) , -(MOVESPEED - gap) , -(MOVESPEED + gap));
+			if(clock->Get() - starttime > breaktime) isFinishPovit = true;
 			if(dist_state){
 				float left , right;
 				left = sensorSubsystem->GetDistLeft();
@@ -108,7 +107,7 @@ void PivotCommand::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool PivotCommand::IsFinished()
 {
-	return isFinishPovit || oi->GetUregetButton() || IsTimedOut();
+	return isFinishPovit || oi->GetUregetButton();
 }
 
 // Called once after isFinished returns true

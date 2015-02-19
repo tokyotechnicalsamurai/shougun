@@ -22,7 +22,7 @@ private:
 public:
 	SensorSubsystem();
 	void InitDefaultCommand();
-	int GetGyro(void);
+	float GetGyro(void);
 	int GetXacceleration(void);
 	int GetYacceleration(void);
 	int GetZacceleration(void);
