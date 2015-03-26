@@ -23,7 +23,7 @@ PivotCommand::PivotCommand(float Angle , bool state , bool state2/* , bool state
 // Called just before this Command runs the first time
 void PivotCommand::Initialize()
 {
-	SetTimeout(2);
+  	SetTimeout(breaktime);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -70,14 +70,14 @@ void PivotCommand::Execute()
 					driveSubsystem->DriveMotors(0.35 , -0.35 , 0.35 , -0.35);
 				}else{
 					std::cout << "coming1\n";
-					isFinishPovit = true;
+//					isFinishPovit = true;
 				}
 			}else{ //pallel move
 				if(deg < povitAngle){
 					driveSubsystem->DriveMotors(-0.35 , 0.35 , -0.35 , 0.35);
 				}else{
 					std::cout << "coming2\n";
-					isFinishPovit = true;
+//					isFinishPovit = true;
 				}
 			}
 		}else{
@@ -87,6 +87,7 @@ void PivotCommand::Execute()
 			}else{
 				gap = ((gap > 0) ? 0.1 : -0.1);
 			}
+			gap = 0;//
 			driveSubsystem->DriveMotors(-(MOVESPEED - gap) , -(MOVESPEED + gap) , -(MOVESPEED - gap) , -(MOVESPEED + gap));
 			if(clock->Get() - starttime > breaktime) isFinishPovit = true;
 			if(dist_state){
@@ -108,7 +109,7 @@ void PivotCommand::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool PivotCommand::IsFinished()
 {
-	return isFinishPovit || oi->GetUregetButton();
+	return isFinishPovit || oi->GetUregetButton() || (!parallel_state && IsTimedOut());
 }
 
 // Called once after isFinished returns true
