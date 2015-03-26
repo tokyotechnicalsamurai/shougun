@@ -20,8 +20,8 @@
 #define ELEVATORMOVE true
 
 //SPEED Setting
-#define SPEED 0.45//0.3 //for normal Speed in Teleoperated Mode
-#define SLOWSPEED 0.2//0.15 //for SLOWMODE Speed in Teleoperated Mode
+#define SPEED 0.45 //0.3 //for normal Speed in Teleoperated Mode
+#define SLOWSPEED 0.2 //0.15 //for SLOWMODE Speed in Teleoperated Mode
 
 /*
    Auto mode
