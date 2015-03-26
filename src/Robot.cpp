@@ -20,7 +20,8 @@ private:
 		autonomousCommand = new AutonomousCommandGroup();
 		driveCommand = new DriveCommand();
 		//Camera Capture send to Dashboard
-		CameraServer::GetInstance()->SetQuality(50);
+
+		CameraServer::GetInstance()->SetQuality(30);
 		CameraServer::GetInstance()->StartAutomaticCapture("cam1");
 
 		lw = LiveWindow::GetInstance();
