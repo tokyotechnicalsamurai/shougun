@@ -1,5 +1,6 @@
 #include "PivotCommand.h"
-
+//if state is true, this command uses to rotate angle.
+//if not, this command is used to parallel move
 PivotCommand::PivotCommand(float Angle , bool state , bool state2/* , bool state3*/)
 {
 	// Use Requires() here to declare subsystem dependencies
@@ -63,7 +64,7 @@ void PivotCommand::Execute()
 		prespeed = speed;
 		std::cout << "  deg : " <<  deg << std::endl;
 
-		if(!parallel_state){
+		if(!parallel_state){ //right angle
 			if(isRightPovit){
 				if(deg > povitAngle){
 					driveSubsystem->DriveMotors(0.35 , -0.35 , 0.35 , -0.35);
@@ -71,7 +72,7 @@ void PivotCommand::Execute()
 					std::cout << "coming1\n";
 					isFinishPovit = true;
 				}
-			}else{
+			}else{ //pallel move
 				if(deg < povitAngle){
 					driveSubsystem->DriveMotors(-0.35 , 0.35 , -0.35 , 0.35);
 				}else{
