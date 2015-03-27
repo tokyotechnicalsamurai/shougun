@@ -23,7 +23,7 @@ PivotCommand::PivotCommand(float Angle , bool state , bool state2/* , bool state
 // Called just before this Command runs the first time
 void PivotCommand::Initialize()
 {
-  	SetTimeout(breaktime);
+  	SetTimeout(2.0);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -78,6 +78,7 @@ void PivotCommand::Execute()
 					std::cout << "coming2\n";
 				}
 			}
+			if(IsTimedOut()) break;
 		}else{
 			float gap;
 			if(-10.0 < deg  &&  deg < 10.0){

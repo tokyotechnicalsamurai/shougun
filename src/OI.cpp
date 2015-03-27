@@ -15,6 +15,8 @@ OI::OI() : joystick(JOYSTICK)
 	// Process operator interface input here.
 	AButton->WhileHeld(new AdjustAngle());
 
+	/*
 	BButton->WhenPressed(new PivotCommand(-90));
 	XButton->WhenPressed(new PivotCommand(90));
+	*/
 }
