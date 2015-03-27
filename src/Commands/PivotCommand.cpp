@@ -70,14 +70,12 @@ void PivotCommand::Execute()
 					driveSubsystem->DriveMotors(0.35 , -0.35 , 0.35 , -0.35);
 				}else{
 					std::cout << "coming1\n";
-//					isFinishPovit = true;
 				}
 			}else{ //pallel move
 				if(deg < povitAngle){
 					driveSubsystem->DriveMotors(-0.35 , 0.35 , -0.35 , 0.35);
 				}else{
 					std::cout << "coming2\n";
-//					isFinishPovit = true;
 				}
 			}
 		}else{
