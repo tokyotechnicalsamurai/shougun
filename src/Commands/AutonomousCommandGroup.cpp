@@ -9,12 +9,11 @@
 
 AutonomousCommandGroup::AutonomousCommandGroup()
 {
-
 	AddSequential(new MoveElevator(3.0,true));
 	AddSequential(new Move2Container());
-	//AddSequential(new AdjustAngle());
+	AddSequential(new AdjustAngle());
 	AddSequential(new PivotCommand(MOVETIME , true));
-	AddSequential(new PivotCommand(-1.2));
+	AddSequential(new PivotCommand(-90));
 	AddParallel(new MoveElevator(2.0,false));
 	AddSequential(new BringBurden(2.0,false));
 }

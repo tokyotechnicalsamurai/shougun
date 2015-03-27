@@ -23,7 +23,7 @@ PivotCommand::PivotCommand(float Angle , bool state , bool state2/* , bool state
 // Called just before this Command runs the first time
 void PivotCommand::Initialize()
 {
-  	SetTimeout(2.0);
+  	SetTimeout(1.2);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -36,10 +36,10 @@ void PivotCommand::Execute()
 	deg = 0;
 	base = 0;
 	prespeed = 0;
+	driveSubsystem->DriveMotors(0 , 0 , 0 , 0);
 	Wait(0.2);
 	for(short i = 0  ;  i < 10  ;  i++){
 		base += sensorSubsystem->GetGyro();
-		std::cout << sensorSubsystem->GetGyro() << std::endl;
 	}
 	base /= 10.0;
 	std::cout << "base " << base << std::endl;
@@ -86,7 +86,6 @@ void PivotCommand::Execute()
 			}else{
 				gap = ((gap > 0) ? 0.1 : -0.1);
 			}
-			gap = 0;//
 			driveSubsystem->DriveMotors(-(MOVESPEED - gap) , -(MOVESPEED + gap) , -(MOVESPEED - gap) , -(MOVESPEED + gap));
 			if(clock->Get() - starttime > breaktime) isFinishPovit = true;
 			if(dist_state){
