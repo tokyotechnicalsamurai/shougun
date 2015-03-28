@@ -10,14 +10,9 @@
 AutonomousCommandGroup::AutonomousCommandGroup()
 {
 
-/*
-	AddSequential(new PivotCommand(MOVETIME , true));
-	AddSequential(new MoveElevator(1.5,true));
-	//AddSequential(new Move2Container());
-	//AddSequential(new AdjustAngle());
-	AddSequential(new PivotCommand(MOVETIME , true));
-	//AddSequential(new PivotCommand(-90));
-	//AddParallel(new MoveElevator(2.0,false));
-	//AddSequential(new BringBurden(2.0,false));
-*/
+	/*
+	 * MoveElevator(float time,bool up) = move elevator while #{time} time. If #{up} is true, elevator is up. If not, elevator is down *
+	 * BringBurden(float time,float speed) = move front and back. if #{speed} is plus, move front, and if not, move back while #{time} time.
+	 * PincerMovement(float time,float speed) = move right or left. if #{speed} is plus, move right, and if not move left while #{time} time.
+	 * */
 }
