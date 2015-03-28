@@ -6,6 +6,7 @@
 //Command and CommandGroup
 #include "Commands/DriveCommand.h"
 #include "Commands/AutonomousCommandGroup.h"
+#include "Commands/NullCommand.h"
 
 class Robot: public IterativeRobot
 {
@@ -17,16 +18,8 @@ private:
 	void RobotInit()
 	{
 		CommandBase::init();
-		autonomousCommand = new AutonomousCommandGroup();
+		autonomousCommand = new NullCommand();
 		driveCommand = new DriveCommand();
-		//Camera Capture send to Dashboard
-
-	/*
-		CameraServer::GetInstance()->SetQuality(30);
-		CameraServer::GetInstance()->StartAutomaticCapture("cam1");
-
-		lw = LiveWindow::GetInstance();
-		*/
 	}
 	
 	void DisabledPeriodic()
