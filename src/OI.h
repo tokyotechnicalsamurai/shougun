@@ -26,8 +26,6 @@ private:
 
 public:
 	Joystick joystick;
-	Joystick *stick4Button;
-	JoystickButton *AButton,*BButton,*XButton;
 	OI();
 
 	inline float GetXplusY(){
