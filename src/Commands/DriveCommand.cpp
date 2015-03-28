@@ -113,10 +113,10 @@ void DriveCommand::NormalDriveCommand()
 //Kawabata mode Command Function
 void DriveCommand::KawabataDriveCommand()
 {
-	rightFrontSpeed = oi->GetXplusY() * speed + oi->GetStickRightX()  * speed;
-	leftFrontSpeed = oi->GetXminusY() * speed - oi->GetStickRightX()  * speed;
-	rightBackSpeed = oi->GetXminusY() * speed + oi->GetStickRightX()  * speed;
-	leftBackSpeed = oi->GetXplusY() * speed - oi->GetStickRightX()  * speed;
+	rightFrontSpeed = oi->GetXplusY() * speed + (1.4 * oi->GetStickRightX())  * speed;
+	leftFrontSpeed = oi->GetXminusY() * speed - (1.4 * oi->GetStickRightX())  * speed;
+	rightBackSpeed = oi->GetXminusY() * speed + (1.4 * oi->GetStickRightX())  * speed;
+	leftBackSpeed = oi->GetXplusY() * speed - (1.4 * oi->GetStickRightX())  * speed;
 	driveSubsystem->DriveMotors(rightFrontSpeed,leftFrontSpeed,rightBackSpeed,leftBackSpeed);
 	if(elevatorSubsystem->underSwitch.Get()){
 		elevatorSubsystem->DriveElevator(-0.1);
