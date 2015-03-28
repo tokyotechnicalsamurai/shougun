@@ -1,7 +1,7 @@
 #include "PivotCommand.h"
 //if state is true, this command uses to rotate angle.
 //if not, this command is used to parallel move
-PivotCommand::PivotCommand(float Angle , bool state , bool state2/* , bool state3*/)
+PivotCommand::PivotCommand(float Angle , bool state , bool state2)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -17,7 +17,7 @@ PivotCommand::PivotCommand(float Angle , bool state , bool state2/* , bool state
 		isRightPovit = true;
 	}
 	parallel_state = state;
-	dist_state = state2;
+	vector_state = state2;
 }
 
 // Called just before this Command runs the first time
@@ -86,9 +86,13 @@ void PivotCommand::Execute()
 			}else{
 				gap = ((gap > 0) ? 0.1 : -0.1);
 			}
-			driveSubsystem->DriveMotors(-(MOVESPEED - gap) , -(MOVESPEED + gap) , -(MOVESPEED - gap) , -(MOVESPEED + gap));
+			if(vector_state == false){
+				driveSubsystem->DriveMotors(-(MOVESPEED - gap) , -(MOVESPEED + gap) , -(MOVESPEED - gap) , -(MOVESPEED + gap));
+			}else{
+				driveSubsystem->DriveMotors( (MOVESPEED - gap) , -(MOVESPEED + gap) , -(MOVESPEED - gap) ,  (MOVESPEED + gap));
+			}
 			if(clock->Get() - starttime > breaktime) isFinishPovit = true;
-			if(dist_state){
+			if(false){
 				float left , right;
 				left = sensorSubsystem->GetDistLeft();
 				right = sensorSubsystem->GetDistRight();
