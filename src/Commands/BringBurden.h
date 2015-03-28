@@ -7,10 +7,9 @@
 class BringBurden: public CommandBase
 {
 private:
-	float moveTime;
-	bool front;
+	float moveTime,moveSpeed;
 public:
-	BringBurden(float time,bool isFront);
+	BringBurden(float time,float speed);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

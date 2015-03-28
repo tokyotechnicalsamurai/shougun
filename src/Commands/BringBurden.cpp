@@ -1,12 +1,12 @@
 #include "BringBurden.h"
 #include "../RobotMap.h"
 
-BringBurden::BringBurden(float time,bool isFront)
+BringBurden::BringBurden(float time,float speed)
 {
 	Requires(driveSubsystem);
 	Requires(sensorSubsystem);
 	moveTime = time;
-	front = isFront;
+	moveSpeed = speed;
 
 }
 
@@ -19,10 +19,10 @@ void BringBurden::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void BringBurden::Execute()
 {
-	if(front){
-		driveSubsystem->DriveMotors(-MOVESPEED,-MOVESPEED,-MOVESPEED,-MOVESPEED);
+	if(moveSpeed > 0){
+		driveSubsystem->DriveMotors(-moveSpeed,-moveSpeed,-moveSpeed,-moveSpeed);
 	}else{
-		driveSubsystem->DriveMotors(BACKMOVESPEED,BACKMOVESPEED,BACKMOVESPEED,BACKMOVESPEED);
+		driveSubsystem->DriveMotors(moveSpeed,moveSpeed,moveSpeed,moveSpeed);
 	}
 }
 
