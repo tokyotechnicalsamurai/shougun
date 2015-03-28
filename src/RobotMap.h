@@ -29,11 +29,11 @@
 //Move2Container Command Setting
 #define BACKTIME 0.3
 #define CONTAINERDIST 45.0
-#define MOVE2CONTAINERTIME 2.2
+#define MOVE2CONTAINERTIME 2.1
 
 //BringBurden Command Setting
-#define MOVETIME 3.0
-#define MOVESPEED 0.4
+#define MOVETIME 1.5
+#define MOVESPEED 0.3
 #define BACKMOVESPEED 0.15
 
 /**

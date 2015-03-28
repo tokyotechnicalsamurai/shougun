@@ -69,13 +69,13 @@ void PivotCommand::Execute()
 				if(deg > povitAngle){
 					driveSubsystem->DriveMotors(0.35 , -0.35 , 0.35 , -0.35);
 				}else{
-					std::cout << "coming1\n";
+					break;
 				}
-			}else{ //pallel move
+			}else{
 				if(deg < povitAngle){
 					driveSubsystem->DriveMotors(-0.35 , 0.35 , -0.35 , 0.35);
 				}else{
-					std::cout << "coming2\n";
+					break;
 				}
 			}
 			if(IsTimedOut()) break;
