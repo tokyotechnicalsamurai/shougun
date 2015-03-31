@@ -19,11 +19,7 @@ void BringBurden::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void BringBurden::Execute()
 {
-	if(moveSpeed > 0){
-		driveSubsystem->DriveMotors(-moveSpeed,-moveSpeed,-moveSpeed,-moveSpeed);
-	}else{
-		driveSubsystem->DriveMotors(moveSpeed,moveSpeed,moveSpeed,moveSpeed);
-	}
+	driveSubsystem->DriveMotors(-moveSpeed,-moveSpeed,-moveSpeed,-moveSpeed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
