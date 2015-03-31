@@ -18,7 +18,7 @@ private:
 	void RobotInit()
 	{
 		CommandBase::init();
-		autonomousCommand = new NullCommand();
+		autonomousCommand = new AutonomousCommandGroup();
 		driveCommand = new DriveCommand();
 	}
 	

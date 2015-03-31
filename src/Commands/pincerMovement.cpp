@@ -43,4 +43,5 @@ void pincerMovement::End()
 void pincerMovement::Interrupted()
 {
 
+	driveSubsystem->Stop();
 }
