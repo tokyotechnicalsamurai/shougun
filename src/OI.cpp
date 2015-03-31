@@ -7,14 +7,4 @@
 OI::OI() : joystick(JOYSTICK)
 {
 
-	stick4Button = new Joystick(JOYSTICK);
-
-	AButton = new JoystickButton(stick4Button,A_BUTTON);
-	BButton = new JoystickButton(stick4Button,B_BUTTON);
-	XButton = new JoystickButton(stick4Button,X_BUTTON);
-	// Process operator interface input here.
-	AButton->WhileHeld(new AdjustAngle());
-
-	BButton->WhenPressed(new PivotCommand(-90));
-	XButton->WhenPressed(new PivotCommand(90));
 }

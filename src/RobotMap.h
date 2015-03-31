@@ -20,8 +20,8 @@
 #define ELEVATORMOVE true
 
 //SPEED Setting
-#define SPEED 0.45 //0.3 //for normal Speed in Teleoperated Mode
-#define SLOWSPEED 0.2 //0.15 //for SLOWMODE Speed in Teleoperated Mode
+#define SPEED 0.35  //for normal Speed in Teleoperated Mode
+#define SLOWSPEED 0.2  //for SLOWMODE Speed in Teleoperated Mode
 
 /*
    Auto mode
@@ -29,10 +29,10 @@
 //Move2Container Command Setting
 #define BACKTIME 0.3
 #define CONTAINERDIST 45.0
-#define MOVE2CONTAINERTIME 1.5
+#define MOVE2CONTAINERTIME 2.1
 
 //BringBurden Command Setting
-#define MOVETIME 5.0
+#define MOVETIME 1.5
 #define MOVESPEED 0.3
 #define BACKMOVESPEED 0.15
 

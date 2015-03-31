@@ -1,7 +1,7 @@
 #include "PivotCommand.h"
 //if state is true, this command uses to rotate angle.
 //if not, this command is used to parallel move
-PivotCommand::PivotCommand(float Angle , bool state , bool state2/* , bool state3*/)
+PivotCommand::PivotCommand(float Angle , bool state , bool state2)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -17,13 +17,13 @@ PivotCommand::PivotCommand(float Angle , bool state , bool state2/* , bool state
 		isRightPovit = true;
 	}
 	parallel_state = state;
-	dist_state = state2;
+	vector_state = state2;
 }
 
 // Called just before this Command runs the first time
 void PivotCommand::Initialize()
 {
-	SetTimeout(2);
+  	SetTimeout(1.2);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -36,10 +36,10 @@ void PivotCommand::Execute()
 	deg = 0;
 	base = 0;
 	prespeed = 0;
+	driveSubsystem->DriveMotors(0 , 0 , 0 , 0);
 	Wait(0.2);
 	for(short i = 0  ;  i < 10  ;  i++){
 		base += sensorSubsystem->GetGyro();
-		std::cout << sensorSubsystem->GetGyro() << std::endl;
 	}
 	base /= 10.0;
 	std::cout << "base " << base << std::endl;
@@ -69,17 +69,16 @@ void PivotCommand::Execute()
 				if(deg > povitAngle){
 					driveSubsystem->DriveMotors(0.35 , -0.35 , 0.35 , -0.35);
 				}else{
-					std::cout << "coming1\n";
-					isFinishPovit = true;
+					break;
 				}
-			}else{ //pallel move
+			}else{
 				if(deg < povitAngle){
 					driveSubsystem->DriveMotors(-0.35 , 0.35 , -0.35 , 0.35);
 				}else{
-					std::cout << "coming2\n";
-					isFinishPovit = true;
+					break;
 				}
 			}
+			if(IsTimedOut()) break;
 		}else{
 			float gap;
 			if(-10.0 < deg  &&  deg < 10.0){
@@ -87,9 +86,13 @@ void PivotCommand::Execute()
 			}else{
 				gap = ((gap > 0) ? 0.1 : -0.1);
 			}
-			driveSubsystem->DriveMotors(-(MOVESPEED - gap) , -(MOVESPEED + gap) , -(MOVESPEED - gap) , -(MOVESPEED + gap));
+			if(vector_state == false){
+				driveSubsystem->DriveMotors(-(MOVESPEED - gap) , -(MOVESPEED + gap) , -(MOVESPEED - gap) , -(MOVESPEED + gap));
+			}else{
+				driveSubsystem->DriveMotors( (MOVESPEED - gap) , -(MOVESPEED + gap) , -(MOVESPEED - gap) ,  (MOVESPEED + gap));
+			}
 			if(clock->Get() - starttime > breaktime) isFinishPovit = true;
-			if(dist_state){
+			if(false){
 				float left , right;
 				left = sensorSubsystem->GetDistLeft();
 				right = sensorSubsystem->GetDistRight();
@@ -108,7 +111,7 @@ void PivotCommand::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool PivotCommand::IsFinished()
 {
-	return isFinishPovit || oi->GetUregetButton();
+	return isFinishPovit || oi->GetUregetButton() || (!parallel_state && IsTimedOut());
 }
 
 // Called once after isFinished returns true
