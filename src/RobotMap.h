@@ -36,6 +36,12 @@
 #define MOVESPEED 0.3
 #define BACKMOVESPEED 0.15
 
+//ParallelMovement Command Setting
+#define GO		0
+#define BACK	1
+#define RIGHT	2
+#define LEFT	3
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking

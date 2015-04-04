@@ -1,20 +1,15 @@
-#include "PivotCommand.h"
+#include "ParallelMovement.h"
 //if state is true, this command uses to rotate angle.
 //if not, this command is used to parallel move
-PivotCommand::PivotCommand(float Angle)
+ParallelMovement::ParallelMovement(float Time , short state)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(driveSubsystem);
 	Requires(sensorSubsystem);
 
-	isFinishPovit = false;
-	povitAngle = Angle;
-	if(povitAngle > 0){
-		isRightPovit = false;
-	}else{
-		isRightPovit = true;
-	}
+	breaktime = Time;
+	vector_state = state;
 	deg = 0;
 	base = 0;
 	prespeed = 0;
@@ -31,16 +26,16 @@ PivotCommand::PivotCommand(float Angle)
 }
 
 // Called just before this Command runs the first time
-void PivotCommand::Initialize()
+void ParallelMovement::Initialize()
 {
-
+  	SetTimeout(breaktime);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void PivotCommand::Execute()
+void ParallelMovement::Execute()
 {
 	float data = 0;
-	float time , speed;
+	float time , speed , gap;
 
 	for(short i = 0  ;  i < 10  ;  i++){
 		data += sensorSubsystem->GetGyro();
@@ -56,39 +51,49 @@ void PivotCommand::Execute()
 	prespeed = speed;
 	std::cout << "  deg : " <<  deg << std::endl;
 
-	if(isRightPovit){
-		if(deg > povitAngle){
-			driveSubsystem->DriveMotors(0.35 , -0.35 , 0.35 , -0.35);
-		}else{
-			isFinishPovit = true;
-		}
+	if(-10.0 < deg  &&  deg < 10.0){
+		gap = deg * 0.01;
 	}else{
-		if(deg < povitAngle){
-			driveSubsystem->DriveMotors(-0.35 , 0.35 , -0.35 , 0.35);
-		}else{
-			isFinishPovit = true;
+		gap = ((deg > 0) ? 0.1 : -0.1);
+	}
+	switch(vector_state){
+		case GO : {
+			driveSubsystem->DriveMotors(-( MOVESPEED - gap) , -( MOVESPEED + gap) , -( MOVESPEED - gap) , -( MOVESPEED + gap));
+			break;
+		}
+		case BACK : {
+			driveSubsystem->DriveMotors(-(-MOVESPEED - gap) , -(-MOVESPEED + gap) , -(-MOVESPEED - gap) , -(-MOVESPEED + gap));
+			break;
+		}
+		case RIGHT : {
+			driveSubsystem->DriveMotors(-(-MOVESPEED - gap) , -( MOVESPEED + gap) , -( MOVESPEED - gap) , -(-MOVESPEED + gap));
+			break;
+		}
+		case LEFT : {
+			driveSubsystem->DriveMotors(-( MOVESPEED - gap) , -(-MOVESPEED + gap) , -(-MOVESPEED - gap) , -( MOVESPEED + gap));
+			break;
 		}
 	}
+
 	Wait(0.01);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool PivotCommand::IsFinished()
+bool ParallelMovement::IsFinished()
 {
-	return isFinishPovit || oi->GetUregetButton();
+	return oi->GetUregetButton() || IsTimedOut();
 }
 
 // Called once after isFinished returns true
-void PivotCommand::End()
+void ParallelMovement::End()
 {
 	driveSubsystem->Stop();
 	std::cout << "End" << std::endl;
-	isFinishPovit = false;
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void PivotCommand::Interrupted()
+void ParallelMovement::Interrupted()
 {
 
 }
